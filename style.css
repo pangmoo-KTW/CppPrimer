@@ -59,6 +59,7 @@ mark{
   background-color: black;
 }
 #red{
+  font-family: 'Noto Serif KR', serif;
   color: white;
   background: rgb(216, 49, 49);
 }
