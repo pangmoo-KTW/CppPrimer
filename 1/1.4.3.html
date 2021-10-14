@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>
+      CppPrimer
+    </title>
+    <link rel="icon" href="../favicon.ico">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+      href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/github-dark.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+    <center>
+    <a href="../index.html"><h3>C++ 기초</h3></a>      
+    <hr width="50%" noshade>
+    </center>
+    
+    <div class="row">
+      <div class="left">
+        <ol>
+          <li><mark id="red">시작</mark></li>
+        <li><a href="../1/0.html">기본</a></li>
+        <li><a href="../3/0.html">문자열, 벡터, 배열</a></li>
+        <li><a href="../4/0.html">표현식</a></li>
+        <li><a href="../5/0.html">문장</a></li>
+        <li><a href="../6/0.html">함수</a></li>
+        <li><a href="../7/0.html">클래스</a></li>
+        <li><a href="../8/0.html">IO 라이브러리</a></li>
+        <li><a href="../9/0.html">순차 컨테이너</a></li>
+        <li><a href="../10/0.html">제네릭 알고리즘</a></li>
+        <li><a href="../11/0.html">연관 컨테이너</a></li>
+        <li><a href="../12/0.html">동적 메모리</a></li>
+        <li><a href="../13/0.html">복사 제어</a></li>
+        <li><a href="../14/0.html">연산자 오버로드 및 변환</a></li>
+        <li><a href="../15/0.html">객체 지향 프로그래밍</a></li>
+        <li><a href="../16/0.html">템플릿과 제네릭 프로그래밍</a></li>
+        <li><a href="../17/0.html">라이브러리 특수 기능</a></li>
+        <li><a href="../18/0.html">대형 프로그램 도구</a></li>
+        <li><a href="../19/0.html">특수 도구 및 기법</a></li>
+      </ol> 
+      <ul>
+        <li>부록 <a href="../A/html">라이브러리</a></li>
+      </ul>
+      </div>
+      
+      <div class="center">
+        <ol>
+          <li><a href="1.1.html">간단한 C++ 프로그램 작성</a></li>
+          <li><a href="1.2.html">입력/출력 소개</a></li>
+          <li><a href="1.3.html">주석에 관해</a></li>
+          <li><mark id="red">제어의 흐름</mark></li>
+          <li><a href="1.5.html">클래스 소개</a></li>
+          <li><a href="1.6.html">서점 프로그램</a></li>
+        </ol>
+        <ul>
+          <li><a href="1.a.html">단원 요약</a></li>
+          <li><a href="1.b.html">용어 정리</a></li>
+        </ul>
+      </div>
+      
+      <div class="right">
+        <ol>
+          <li><a href="1.4.1.html">while</a></li>
+          <li><a href="1.4.2.html">for</a></li>
+          <li><mark id="red">미지수 입력 읽기</mark></li>
+          <li><a href="1.4.4.html">if</a></li>
+        </ol>
+      </div>
+    </div>
+    
+    <hr width="100%" noshade>
+<p>방금 우리는 1에서 10까지의 수를 더하는 프로그램을 작성했다.
+  이 프로그램의 논리적인 연장은 사용자에게 덧셈을 수행할 숫자 집합을 입력하도록 요청하는 것일 테다.
+  이 경우, 우리는 얼마나 많은 수를 더해야 하는 건지 모른다.
+  대신, 더는 읽을 수가 없을 때까지 수를 읽을 것이다.</p>
+<pre><code>#include &lt;iostream&gt;
+int main()
+{
+    int sum = 0, value = 0;
+    // read until end-of-file, calculating a running total of all values read
+    while (std::cin >> value)
+        sum += value;   // equivalent to sum = sum + value
+    std::cout << "Sum is: " << sum << std::endl;
+    return 0;
+}</code></pre>
+    여기 다음과 같은 입력을 준다면
+    <pre><code>3 4 5 6</code></pre>
+    출력은 다음과 같을 것이다.
+    <pre><code>Sum is: 18</code></pre>
+    <mark>main</mark> 내부의 첫 줄은 <mark>int</mark> 변수 두 개를 정의한다.
+    각각 이름은 <mark>sum</mark>과 <mark>value</mark>이며, 0으로 초기화된다.
+    입력을 통해 읽는 숫자 각각을 포착하기 위해 <mark>value</mark>가 쓰인다.
+    우리는 <mark>while</mark> 조건 내부에서 자료를 읽는다.
+    <pre><code>while(std::cin >> value)</code></pre>
+    <mark>while</mark> 조건 평가 과정에서는 아래 표현식이 실행된다.
+    <pre><code>std::cin >> value</code></pre>
+<p>
+  이 표현식은 표준 입력에서 다음 수를 읽고 이를 <mark>value</mark>에 저장한다.
+  입력 연산자는 자신의 좌측 피연산자를 반환하는데, 이 경우 좌측 피연산자는 <mark>std::cin</mark>이다.
+  이 조건은, 따라서, <mark>std::cin</mark>을 검사한다.
+    </p>
+    <p><mark>istream</mark>을 조건으로서 사용할 때 그 효과는 스트림의 상태를 검사하는 것이다.
+      스트림이 타당하다면, 즉 스트림이 오류와 조우하지 않았다면, 검사는 성공한 것이다.
+      <mark>istream</mark>은 <b>end-of-file</b>에 도달하거나 정수가 아닌 값을 읽는 등 부당한 입력을 입력했을 때 부당하다.
+      부당한 상태에 놓인 <mark>istream</mark>은 조건이 거짓을 취하게 만들 것이다.</p>
+    <p>따라서, 우리의 <mark>while</mark>은 우리가 <mark>end-of-file</mark>에 (또는 입력 오류에) 조우할 때까지 실행될 것이다.
+      <mark>while</mark> 몸체는 복합 대입 연산자를 사용하여 현재 값을 증진하는 <mark>sum</mark>에 더한다.
+      조건이 실패하면, <mark>while</mark>은 끝난다.
+      우리는 루프를 탈출하고 다음 문장이 실행된다.
+      즉 <mark>sum</mark>이 출력되고 <mark>endl</mark>이 이어진다.</p>
+<hr width="100%" noshade>
+    <h4>키보드로 <mark>end-of-file</mark> 진입하기</h4>
+    키보드로 프로그램에 입력을 넣을 때, 운영체제에 따라 <mark>end-of-file</mark>을 나타내는 관행이 다르다.
+    윈도우즈 시스템에서는 <mark>ctrl z</mark>를 누른 다음 엔터나 리턴 키를 누르면 된다.
+    Mac OS X를 포함한 유닉스 시스템에서 <mark>end-of-file</mark>은 주로 <mark>ctrl d</mark>다.
+<hr width="100%" noshade>
+<h4>컴파일 재고</h4>
+<p>컴파일러의 책무 가운데 하나는 프로그램 텍스트상에서 오류를 찾는 것이다.
+  컴파일러는 프로그램이 하는 일이나 저자의 의도를 파악할 수는 없지만 프로그램의 <b>형식(form)</b>을 통해 오류를 감지할 수 있다.
+  아래는 컴파일러가 감지할 가장 일반적인 유형의 오류다.</p>
+    <p><b>구문 오류(Syntax errors)</b>: 프로그래머가 C++ 언어에서 문법적 오류를 저지른 경우.
+      아래 프로그램은 일반적인 구문 오류를 보여준다. 
+      각 주석은 해당 라인의 오류를 설명한다.</p>
+<pre><code>// error: missing ) in parameter list for main
+int main( {
+    // error: used colon, not a semicolon, after endl
+    std::cout << "Read each file." << std::endl:
+    // error: missing quotes around string literal
+    std::cout << Update master. << std::endl;
+    // error: second output operator is missing
+    std::cout << "Write new master." std::endl
+    // error: missing ; on return statement
+    return 0
+}</code></pre>
+    <p>타입 오류: C++에서 각각의 자료는 타입을 갖는다.
+      10이라는 값은 가령 <mark>int</mark> 타입을 갖는다. (달리 말해, "<mark>int</mark>다.")
+      <mark>"hello"</mark>는 따옴표를 포함하여 스트링 리터럴이다.
+      일어날 수 있는 타입 오류의 예는 <mark>int</mark> 전달인자(argument)가 요구되는 함수에 스트링 리터럴을 넘기는 것이다.</p>
+    <p>선언 오류: C++에서 쓰이는 모든 이름은 사용 전에 반드시 선언되어야 한다.
+      이름 선언 실패는 주로 오류 메시지로 이어진다.
+      가장 흔한 선언 오류의 두 가지 예로는 라이브러리에서 이름을 사용하는 과정에서 <mark>std::</mark> 사용을 까먹는 것과 변수 이름 오타를 꼽을 수 있다.</p>
+<pre><code>#include &lt;iostream&gt;
+int main()
+{
+    int v1 = 0, v2 = 0;
+    std::cin >> v >> v2;  // error: uses "v" not "v1"
+    // error: cout not defined; shoulde be std::cout
+    cout << v1 + v2 << std::endl;
+    return 0;
+}</code></pre>
+<p>오류 메시지는 주로 라인 넘버와 컴파일러가 틀렸다고 보는 것에 관한 간략한 설명으로 구성된다.
+  보고된 순서에 따라 오류를 수정하는 편이 좋다.
+  하나의 오류로 인해 전부 무너질 수 있고, 컴파일러는 실제로 일어난 오류보다 더 많은 오류를 보고할 수도 있다.
+  수정할 때마다 코드를 재컴파일하는 것 또한 좋은 생각이다.
+  아니면 명백한 오류를 조금만 수정한 다음 컴파일해도 좋다.
+  이런 사이클은 <b>편집-컴파일-디버그(edit-compile-debug)</b>라고 불린다.
+<hr width="100%" noshade>
+    <h4>연습문제 1.4.3</h4>
+    <b>연습문제 1.16</b>
+    <mark>cin</mark>에서 읽어들이는 정수 집합의 합을 출력하는 프로그램을 당신의 판본으로 작성하라.
+    
+    <hr width="100%" noshade>
+    <p style="text-align:right;">
+      <a href="http://www.charleshouserjr.com/Cplus2.pdf">C++ Primer 5th Edition</a>
+      (Lippman, Lajoie, Moo)
+      <br>번역 <a href="https://sunbeamktw.github.io/BirCon/">김태원</a></p>
+  </body>
+</html>
