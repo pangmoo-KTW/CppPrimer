@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>
+      CppPrimer
+    </title>
+    <link rel="icon" href="../favicon.ico">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+      href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/github-dark.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+    <center>
+    <a href="../index.html"><h3>C++ 기초</h3></a>      
+    <hr width="50%" noshade>
+    </center>
+    
+    <div class="row">
+      <div class="left">
+        <ol>
+          <li><mark id="red">시작</mark></li>
+        <li><a href="../1/0.html">기본</a></li>
+        <li><a href="../3/0.html">문자열, 벡터, 배열</a></li>
+        <li><a href="../4/0.html">표현식</a></li>
+        <li><a href="../5/0.html">문장</a></li>
+        <li><a href="../6/0.html">함수</a></li>
+        <li><a href="../7/0.html">클래스</a></li>
+        <li><a href="../8/0.html">IO 라이브러리</a></li>
+        <li><a href="../9/0.html">순차 컨테이너</a></li>
+        <li><a href="../10/0.html">제네릭 알고리즘</a></li>
+        <li><a href="../11/0.html">연관 컨테이너</a></li>
+        <li><a href="../12/0.html">동적 메모리</a></li>
+        <li><a href="../13/0.html">복사 제어</a></li>
+        <li><a href="../14/0.html">연산자 오버로드 및 변환</a></li>
+        <li><a href="../15/0.html">객체 지향 프로그래밍</a></li>
+        <li><a href="../16/0.html">템플릿과 제네릭 프로그래밍</a></li>
+        <li><a href="../17/0.html">라이브러리 특수 기능</a></li>
+        <li><a href="../18/0.html">대형 프로그램 도구</a></li>
+        <li><a href="../19/0.html">특수 도구 및 기법</a></li>
+      </ol> 
+      <ul>
+        <li>부록 <a href="../A/html">라이브러리</a></li>
+      </ul>
+      </div>
+      
+      <div class="center">
+        <ol>
+          <li><a href="1.1.html">간단한 C++ 프로그램 작성</a></li>
+          <li><a href="1.2.html">입력/출력 소개</a></li>
+          <li><a href="1.3.html">주석에 관해</a></li>
+          <li><mark id="red">제어의 흐름</mark></li>
+          <li><a href="1.5.html">클래스 소개</a></li>
+          <li><a href="1.6.html">서점 프로그램</a></li>
+        </ol>
+        <ul>
+          <li><a href="1.a.html">단원 요약</a></li>
+          <li><a href="1.b.html">용어 정리</a></li>
+        </ul>
+      </div>
+      
+      <div class="right">
+        <ol>
+          <li><mark id="red">while</mark></li>
+          <li><a href="1.4.2.html">for</a></li>
+          <li><a href="1.4.3.html">미지수 입력 읽기</a></li>
+          <li><a href="1.4.4.html">if</a></li>
+        </ol>
+      </div>
+    </div>
+    
+    <hr width="100%" noshade>
+<b>while 문장</b>은 주어진 조건이 참일 때까지 코드의 한 부분을 반복적으로 실행한다.
+    우리는 <mark>while</mark>을 1에서 10까지의 수를 더하는 프로그램에 쓸 수 있다.
+<pre><code>#include &lt;iostream&gt;
+int main()
+{
+    int sum = 0, val = 1;
+    // keep executing the while as long as val is less than or equal to 10
+    while (val <= 10){
+        sum += val;   // assigns sum + val to sum
+        ++val;        // add i to val
+    }
+    std::cout << "Sum of 1 to 10 inclusive is "
+              << sum << std::endl;
+    return 0;
+}</code></pre>
+이 프로그램을 컴파일하면, 다음이 출력된다.
+<pre><code>Sum of 1 to 10 inclusive is 55</code></pre>
+<p>이전과 마찬가지로, 우리는 <mark>iostream</mark> 헤더 포함 및 <mark>main</mark> 정의로 시작한다.
+<mark>main</mark> 안에서 우리는 <mark>int</mark> 변수 두 개를 정의한다.
+합을 담을 <mark>sum</mark>과 1부터 10에 이르는 값을 표현할 <mark>val</mark>이 그것이다.
+우리는 <mark>sum</mark>을 0으로 초기화하고 <mark>val</mark>을 1의 값으로 시작한다.</p>
+프로그램에서 새로운 부분은 바로 <mark>while</mark> 문장이다. <mark>while</mark>은 다음 형식을 취한다.
+<pre><code>while(condition)
+        statement</code></pre>
+<p><mark>while</mark>은 조건을 검사하고 조건이 거짓일 때까지 연결된 문장을 실행함으로써 실행된다.
+<b>조건(condition)</b>이란 결과물이 참인지 거짓인지 결정하는 표현식이다.
+조건이 참일 때, 문장은 실행된다.
+문장 실행 이후, 조건은 다시 검사된다.
+조건이 다시 참이라면, 문장은 다시 실행된다. 
+<mark>while</mark>은 계속되며, 조건이 거짓일 때까지 조건을 검사하고 문장을 실행한다.</p>
+<p>이 프로그램에서, <mark>while</mark> 문장은 다음과 같다.</p>
+<pre><code>// keep executing the while as long as val is less than or equal to 10
+while(val <= 10){
+    sum += val;   // assigns sum + val to sum
+    ++val;        // add 1 to val
+}</code></pre>
+조건은 <b>이하(<=) 연산자</b> 연산자를 사용하여 <mark>val</mark>과 <mark>10</mark>의 현재 값을 비교한다.
+<mark>val</mark>이 10 이하인 이상, 조건은 참이다.
+조건이 참이라면, <mark>while</mark> 몸체가 실행된다.
+이 경우 몸체란 다음 두 문장의 블록이다.
+<pre><code>{
+    sum += val;   // assigns sum + val to sum
+    ++val;        // add 1 to val
+}</code></pre>
+블록이란 중괄호로 묶이는 0개 이상의 일련의 문장이다. 블록 또한 하나의 문장으로, 문장이 요구되는 곳이라면 어디든 쓰일 수 있다. 이 블록의 첫 번째 문장은 복합 대입 연산자(compound assignment operator, +=)를 사용한다. 이 연산자는 우측 피연산자를 자신의 좌측 피연산자에 더한 다음 그 결과를 좌측 피연산자에 저장한다. 본질적으로 다음처럼 덧셈을 수행하는 것과 다를 바가 없다.
+<pre><code>sum = sum + val;   // assign sum + val to sum</code></pre>
+<p>
+따라서 이 블록상의 첫 번째 문장은 <mark>sum</mark>의 현재 값에 <mark>val</mark>의 값을 더한다.
+</p>
+<p>
+다음 문장은 다음과 같다.
+</p>
+<pre><code>++val;    // add 1 to val;</code></pre>
+<p>
+이 문장은 전위 증감 연산자(prefix increment operator, ++)를 사용한다.
+증감 연산자는 피연산자에 1을 더한다. 
+<mark>++val</mark>이라고 적는 일은 <mark>val = val + 1</mark>이라고 적는 것과 같다.
+</p>
+<p>
+<mark>while</mark> 몸체 실행이 끝나면 루프는 다시 조건을 평가한다.
+(방금 증감된) <mark>val</mark>의 값이 여전히 10 이하라면, <mark>while</mark> 몸체가 다시 실행된다.
+루프는 계속되고, <mark>val</mark>이 더는 10 이하는 아닐 때까지 조건을 검사하고 몸체를 실행한다.
+</p>
+<p>
+<mark>val</mark>이 10을 초과할 때면, 프로그램은 <mark>while</mark> 루프 밖으로 떨어져 나간 다음 <mark>while</mark>에서 이어지는 문장을 이어서 실행한다.
+이 경우, 그 문장은 바로 출력을 담당하는 것으로, 그다음에는 <mark>return</mark>이 이어져, <mark>main</mark> 프로그램이 끝난다.
+</p>
+<hr width="100%" noshade>
+<h4>연습문제 1.4.1</h4>
+<p>
+<b>연습문제 1.9</b>
+50에서 100까지의 수를 더하는 프로그램을 <mark>while</mark>을 사용하여 작성할 것.
+</p>
+<p>
+<b>연습문제 1.10</b>
+<mark>++</mark> 연산자가 있다면, <mark>--</mark>연산자도 있다. 
+가감 연산자를 이용하여 <mark>while</mark>이 10에서 0까지 출력하도록 프로그램을 작성할 것.
+</p>
+<b>연습문제 1.11</b>
+사용자에게 정수 두개를 요청한 다음, 그 정수만큼의 너비로 각각의 정수를 출력하는 프로그램을 작성할 것.
+<hr width="100%" noshade>
+    <p style="text-align:right;">
+      <a href="http://www.charleshouserjr.com/Cplus2.pdf">C++ Primer 5th Edition</a>
+      (Lippman, Lajoie, Moo)
+      <br>번역 <a href="https://sunbeamktw.github.io/BirCon/">김태원</a></p>
+  </body>
+</html>
