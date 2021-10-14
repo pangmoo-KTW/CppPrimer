@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>
+      CppPrimer
+    </title>
+    <link rel="icon" href="../favicon.ico">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+      href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/github-dark.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+    <center>
+    <a href="../index.html"><h3>C++ 기초</h3></a>      
+    <hr width="50%" noshade>
+    </center>
+    
+    <div class="row">
+      <div class="left">
+        <ol>
+          <li><mark id="red">시작</mark></li>
+        <li><a href="../1/0.html">기본</a></li>
+        <li><a href="../3/0.html">문자열, 벡터, 배열</a></li>
+        <li><a href="../4/0.html">표현식</a></li>
+        <li><a href="../5/0.html">문장</a></li>
+        <li><a href="../6/0.html">함수</a></li>
+        <li><a href="../7/0.html">클래스</a></li>
+        <li><a href="../8/0.html">IO 라이브러리</a></li>
+        <li><a href="../9/0.html">순차 컨테이너</a></li>
+        <li><a href="../10/0.html">제네릭 알고리즘</a></li>
+        <li><a href="../11/0.html">연관 컨테이너</a></li>
+        <li><a href="../12/0.html">동적 메모리</a></li>
+        <li><a href="../13/0.html">복사 제어</a></li>
+        <li><a href="../14/0.html">연산자 오버로드 및 변환</a></li>
+        <li><a href="../15/0.html">객체 지향 프로그래밍</a></li>
+        <li><a href="../16/0.html">템플릿과 제네릭 프로그래밍</a></li>
+        <li><a href="../17/0.html">라이브러리 특수 기능</a></li>
+        <li><a href="../18/0.html">대형 프로그램 도구</a></li>
+        <li><a href="../19/0.html">특수 도구 및 기법</a></li>
+      </ol> 
+      <ul>
+        <li>부록 <a href="../A/html">라이브러리</a></li>
+      </ul>
+      </div>
+      
+      <div class="center">
+        <ol>
+          <li><a href="1.1.html">간단한 C++ 프로그램 작성</a></li>
+          <li><a href="1.2.html">입력/출력 소개</a></li>
+          <li><a href="1.3.html">주석에 관해</a></li>
+          <li><mark id="red">제어의 흐름</mark></li>
+          <li><a href="1.5.html">클래스 소개</a></li>
+          <li><a href="1.6.html">서점 프로그램</a></li>
+        </ol>
+        <ul>
+          <li><a href="1.a.html">단원 요약</a></li>
+          <li><a href="1.b.html">용어 정리</a></li>
+        </ul>
+      </div>
+      
+      <div class="right">
+        <ol>
+          <li><a href="1.4.1.html">while</a></li>
+          <li><mark id="red">for</mark></li>
+          <li><a href="1.4.3.html">미지수 입력 읽기</a></li>
+          <li><a href="1.4.4.html">if</a></li>
+        </ol>
+      </div>
+    </div>
+    
+    <hr width="100%" noshade>
+
+<p><mark>while</mark> 루프에서는 val 변수를 이용해 루프 실행 횟수를 제어했다.
+또 <mark>val</mark>의 값을 조건상에서 검사했고 <mark>while</mark> 몸체 내부에서 <mark>val</mark>을 증가했다.</p>
+<p>이처럼 변수를 조건 내부에서 사용하고 그 변수를 몸체 내부에서 또 사용하는 패턴은 너무 자주 일어나기에, 언어는 두 번째 문장을 정의한다.
+그것이 바로 <b>for</b> 문장으로, 이 패턴을 따르는 코드를 요약한다.
+우리는 <mark>for</mark> 루프를 이용해 프로그램을 재작성하여 1에서 10까지의 숫자를 다음처럼 합칠 수 있다.</p>
+<pre><code>#include &lt;iostream&gt;
+int main()
+{
+    int sum = 0;
+    // sum values from 1 through 10 inclusive
+    for (int val = 1; val <= 10; ++val)
+        sum += val;   // equivalent to sum = sum + val
+    std::cout << "Sum of 1 to 10 inclusive is "
+              << sum << std::endl;
+    return 0;
+}</code></pre>
+<p>저번처럼 이번에도 <mark>sum</mark>을 정의한 다음 이를 0으로 초기화한다.
+이 판본에서, 우리는 <mark>val</mark>을 <mark>for</mark> 문장 자체의 일부분으로 정의한다.</p>
+<pre><code>for (int val = 1; val <=10; ++val)
+    sum += val;</code></pre>
+<p>각 <mark>for</mark> 문장은 두 부분으로 구성된다.
+헤더와 몸체가 그것이다.
+헤더는 몸체 실행 빈도를 제어한다.
+헤더 자체는 세 부분으로 구성된다.
+<b>초기화 문장(init-statement)</b>, <b>조건(condition)</b>, 그리고 <b>표현식(expression)</b>이 그것이다.
+이 경우, <b>초기화 문장</b>은 다음과 같으며</p>
+<pre><code>int val = 1;</code></pre>
+<p><mark>val</mark>이라는 이름의 <mark>int</mark> 객체를 정의하고 여기에 1이라는 초깃값을 부여한다.
+<mark>val</mark> 변수는 오직 <mark>for</mark> 내부에만 존재한다.
+루프 종료 이후 <mark>val</mark>을 사용하는 것은 불가능하다.
+초기화 문장은 <mark>for</mark> 시작과 함께 단 한 번 실행된다.
+<b>조건문</b>은 다음과 같으며
+<pre><code>val <= 10</code></pre>
+<mark>val</mark>의 현재 값을 10과 비교한다.
+조건문은 루프가 돌 때다마다 검사된다.
+<mark>val</mark>이 10 이하인 이상, <mark>for</mark> 몸체가 실행된다.
+<b>표현식</b>은 <mark>for</mark> 몸체 이후에 실행되며, 다음과 같다
+<pre><code>++val</code></pre>
+<p>전위 증감 연산자를 사용해, <mark>val</mark> 값에 1을 더한다.
+표현식 실행 이후, <mark>for</mark>는 조건을 재검사한다.
+새 <mark>val</mark> 값이 여전히 10 이하라면, <mark>for</mark> 루프 몸체는 다시 실행된다.
+실행 이후, <mark>val</mark>은 다시 증감된다.
+루프는 조건이 실패할 때까지 이어진다.</p>
+이 루프에서 <mark>for</mark> 몸체는 합산을 수행한다.
+<pre><code>sum += val;  // equivalent to sum = sum + val</code></pre>
+<p>복습하자면, 여기서 <mark>for</mark>는 전체적으로 이렇게 실행된다.
+<ol>
+<li><mark>val</mark> 실행 및 1로 초기화.</li>
+<li><mark>val</mark>이 10 이하인지 검사. 성공시, <mark>for</mark> 몸체 실행. 실패시, 루프 탈출 및 <mark>for</mark> 몸체에 뒤따르는 첫 문장 실행.</li>
+<li><mark>val</mark> 증감.</li>
+<li>2단계의 검사 재실행. 조건이 참이면 남은 단계 진행.</li>
+</ol></p>
+<p><h4>연습문제 1.4.2</h4>
+<b>연습문제 1.12</b> 아래 <mark>for</mark> 루프는 무엇을 하는가?
+<mark>sum</mark>의 최종 값은 무엇인가?
+<pre><code>int sum = 0;
+for (int i = -100; i <= 100; ++i)
+    sum += i;</code></pre>
+<p><b>연습문제 1.13</b> <mark>for</mark> 루프 사용하여 §1.4.1 연습문제 재작성.</p>
+<p><b>연습문제 1.14</b> <mark>for</mark> 사용 루프와 <mark>while</mark> 사용 루프 비교 및 대조. 장단점은?
+
+<hr width="100%" noshade>
+    <p style="text-align:right;">
+      <a href="http://www.charleshouserjr.com/Cplus2.pdf">C++ Primer 5th Edition</a>
+      (Lippman, Lajoie, Moo)
+      <br>번역 <a href="https://sunbeamktw.github.io/BirCon/">김태원</a></p>
+  </body>
+</html>
