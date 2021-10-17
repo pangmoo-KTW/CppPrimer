@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>
+      CppPrimer
+    </title>
+    <link rel="icon" href="../favicon.ico">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+      href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/github-dark.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+    <center>
+    <a href="../index.html"><h3>C++ 기초</h3></a>      
+    <hr width="50%" noshade>
+    </center>
+    
+    <div class="row">
+      <div class="left">
+        <ol>
+          <li><mark id="red">시작</mark></li>
+        <li><a href="../1/0.html">기본</a></li>
+        <li><a href="../3/0.html">문자열, 벡터, 배열</a></li>
+        <li><a href="../4/0.html">표현식</a></li>
+        <li><a href="../5/0.html">문장</a></li>
+        <li><a href="../6/0.html">함수</a></li>
+        <li><a href="../7/0.html">클래스</a></li>
+        <li><a href="../8/0.html">IO 라이브러리</a></li>
+        <li><a href="../9/0.html">순차 컨테이너</a></li>
+        <li><a href="../10/0.html">제네릭 알고리즘</a></li>
+        <li><a href="../11/0.html">연관 컨테이너</a></li>
+        <li><a href="../12/0.html">동적 메모리</a></li>
+        <li><a href="../13/0.html">복사 제어</a></li>
+        <li><a href="../14/0.html">연산자 오버로드 및 변환</a></li>
+        <li><a href="../15/0.html">객체 지향 프로그래밍</a></li>
+        <li><a href="../16/0.html">템플릿과 제네릭 프로그래밍</a></li>
+        <li><a href="../17/0.html">라이브러리 특수 기능</a></li>
+        <li><a href="../18/0.html">대형 프로그램 도구</a></li>
+        <li><a href="../19/0.html">특수 도구 및 기법</a></li>
+      </ol> 
+      <ul>
+        <li>부록 <a href="../A/html">라이브러리</a></li>
+      </ul>
+      </div>
+      
+      <div class="center">
+        <ol>
+          <li><a href="1.1.html">간단한 C++ 프로그램 작성</a></li>
+          <li><a href="1.2.html">입력/출력 소개</a></li>
+          <li><a href="1.3.html">주석에 관해</a></li>
+          <li><mark id="red">제어의 흐름</mark></li>
+          <li><a href="1.5.html">클래스 소개</a></li>
+          <li><a href="1.6.html">서점 프로그램</a></li>
+        </ol>
+        <ul>
+          <li><a href="1.a.html">단원 요약</a></li>
+          <li><a href="1.b.html">용어 정리</a></li>
+        </ul>
+      </div>
+      
+      <div class="right">
+        <ol>
+          <li><a href="1.4.1.html">while</a></li>
+          <li><a href="1.4.2.html">for</a></li>
+          <li><a href="1.4.3.html">미지수 입력 읽기<a></li>
+          <li><mark id="red">if</mark></li>
+        </ol>
+      </div>
+    </div>
+    
+    <hr width="100%" noshade>
+<p>여타 언어와 마찬가지로 C++는 조건적 실행을 지원하는 <b>if 문장</b>을 제공한다. <mark>if</mark>를 이용해 입력상에서 어떤 값이 얼마나 반복되었는지 확인하는 프로그램을 작성할 수 있다.</p>
+
+<pre><code>#include &lt;iostream&gt;
+int main()
+{
+	// currVal is the number we’re counting; we’ll read new values into val
+	int currVal = 0, val = 0;
+// read first number and ensure that we have data to process
+if (std::cin >> currVal){
+int cnt = 1;	// store the count for the current value we’re processing
+while (std::cin >> val){		// read the remaining numbers
+if (val == currVal) 	// if the values are the same
+	++cnt;		// add 1 to cnt
+else {	// otherwise, print the count for the previous value
+	std::cout << currVal << “ occurs “
+		<< cnt << “ times” << std::endl;
+	currVal = val;		// remember the new value
+	cnt = 1;		// reset the counter
+}
+}	// while loop ends here
+// remember to print the count for the last value in the file
+std::cout << currVal << “ occurs “
+	<< cnt << “ times” << std::endl;
+	} // outermost if statement ends here
+	return 0;
+}</code></pre>
+
+<p>여기 아래 입력을 준다면</p>
+
+<pre><code>42 42 42 42 42 55 55 62 100 100 100</code></pre>
+
+<p>출력물은 다음처럼 나와야 한다.</p>
+
+<pre><code>42 occurs 5 times
+55 occurs 2 times
+62 occurs 1 times
+100 occurs 3 times</code></pre>
+
+<p>대부분 이전 프로그램을 통해 익숙한 코드일 것이다.
+우리는 우선 <mark>val</mark>과 <mark>currVal</mark>을 정의하는 것으로 시작한다.
+<mark>currVal</mark>은 우리가 세고 있는 숫자를 파악할 것이다.
+<mark>val</mark>은 입력에서 읽어 들이는 각각의 숫자를 취할 것이다.
+여기서 새로운 것은 두 <mark>if</mark> 문장이다. 첫 번째 <mark>if</mark>는 다음과 같으며</p>
+
+<pre><code>if (std::cin >> currVal) {
+	// …
+}	// outermost if statement ends here</code></pre>
+
+<p>입력이 비지 않았다는 점을 보장한다. 
+<mark>while</mark>과 마찬가지로 <mark>if</mark>는 조건을 평가한다. 
+첫 번째 <mark>if</mark> 안의 조건은 <mark>currVal</mark>로 값을 읽어 들인다.
+읽는 데 성공했다면 조건은 참이며 조건에서 이어지는 중괄호로 시작하는 블록이 실행된다.
+이 블록은 <mark>return</mark> 문장 직전에 있는 닫는 중괄호와 함께 끝난다.</p>
+
+<p>셀 숫자가 있다는 것을 알았다면 우리는 <mark>cnt<?mark>를 정의해 각각의 숫자가 나타난 횟수를 센다. 
+우리는 이전 단원에서 본 <mark>while</mark> 루프와 유사한 것을 사용해 표준 입력에서 숫자를 (반복적으로) 읽어 들인다.</p>
+
+<p><mark>while</mark>의 몸체는 두 번째 <mark>if</mark> 문장을 포함하는 하나의 블록이다.</p>
+
+<pre><code>if (val == currVal)	// if the values are the same
+	++ cnt;		// add 1 to cnt
+else {	// otherwise, print the count for the previous value
+	std::cout << currVal << “ occurs “
+		<< cnt << “ times” << std::endl;
+	currVal = val;	// remember the new value
+	cnt = 1; 	// reset the counter
+}</code></pre>
+
+<p>이 <mark>if</mark> 속 조건은 (<mark>==</mark>)상등 연산자를 사용해 <mark>val</mark>이 <mark>currVal</mark>과 상등인지 검사한다. 상등이라면 조건에서 바로 이어지는 문장이 실행된다. 그 문장은 <mark>cnt</mark>를 증가시키며, <mark>currVal</mark>가 한 번 더 포착되었다는 것을 암시한다.</p>
+
+<p>조건이 거짓이라면, 즉, <mark>val</mark>이 <mark>currVal</mark>이 상등이 아니라면, <mark>else</mark>에서 이어지는 문장을 실행한다. 
+그 문장은 출력문과 대입문 두 개로 구성되는 하나의 블록이다. 
+이 출력문은 방금 막 처리를 끝낸 값을 센 횟수를 출력한다.
+대입문은 <mark>cnt</mark>를 1로 재설정하고 <mark>currVal</mark>을 <mark>val</mark>로 재설정한다. 여기서 <mark>val</mark>은 방금 우리가 읽은 숫자다.</p> 
+<hr width="100%" noshade>
+<h4>주의</h4>
+<p>C++는 <mark>=</mark>를 대입에 쓰고 <mark>==</mark>를 상등에 쓴다. 
+두 연산자 모두 조건 안에 나타날 수 있다.
+<mark>==</mark>를 써야할 때 <mark>=</mark>를 쓰는 것은 흔한 실수다.</p>
+<hr width="100%" noshade>
+<h4>연습문제</h4>
+<b>연습문제 1.17</b> <p>이 단원에서 제시된 프로그램의 입력이 모두 상등이라면 무슨 일이 일어나는가? 이중의 값이 없다면?</p>
+<b>연습문제 1.18</b> <p>오직 상등인 값을 입력하여 이 단원의 프로그램을 컴파일하고 실행할 것.
+어떤 숫자도 반복되지 않는 값을 주고 다시 실행해볼 것.</p>
+
+<b>연습문제 1.19</b><p>첫 번째로 입력한 숫자가 두 번째로 입력한 숫자보다 작은 경우만을 취급하도록 §1.4.1의 예제에서 작성한 프로그램을 수정할 것. </p>
+<hr width="100%" noshade>
+<h4>핵심 개념: C++ 프로그램의 들여쓰기와 형식화</h4>
+<p>넓게 말해 C++ 프로그램은 자유 형식이다. 
+즉 중괄호, 들여쓰기, 주석, 개행 등이 프로그램의 뜻에 큰 영향을 미치지 않는다.
+가령 <mark>main</mark> 몸체가 시작한다는 것을 표기하는 중괄호는 <mark>main</mark>과 같은 라인에 있어도 상관 없다. 
+다음 라인의 시작이나, 어디든 상관 없다.
+유일한 조건은 <mark>main</mark>의 매개변수 목록 이후의 첫 번째 비공백, 비주석 문자 이후여야 한다는 것이다.</p>
+
+<p>다만 프로그램 가독성이 문제다. 
+우리는 물론 <mark>main</mark> 전체를 하나의 라인에 쓸 수도 있다.
+하지만 그럴 경우 가독성이 떨어질 것이다.</p>
+
+<p>C++ 프로그램 형식화에 관한 논쟁은 끊이지 않는다. 
+우리는 하나의 옳은 방법이 있다고 믿지 않는다.
+다만 일관성은 좋은 것이다.
+대다수 프로그래머는 프로그램의 부수적인 부분에서 들여쓴다.
+우리가 <mark>main</mark> 내부 문장과 루프의 몸체에서 그랬던 것처럼 말이다.
+우리는 함수의 범위를 정하는 중괄호에게 제 라인을 부여한다.
+우리는 또한 연산자들이 이어지도록 복합 입출력 표현식을 들여쓰기한다.
+프로그램이 복잡해질수록 다른 들여쓰기 관행 또한 명백해질 것이다.</p>
+
+<p>유의할 점은 다른 형식화 또한 가능하다는 점이다. 
+형식화 스타일을 선택할 때는, 가독성과 이해도를 신경 써라.
+스타일을 골랐으면, 일관성을 지켜라.</p>
+
+
+
+    <hr width="100%" noshade>
+    <p style="text-align:right;">
+      <a href="http://www.charleshouserjr.com/Cplus2.pdf">C++ Primer 5th Edition</a>
+      (Lippman, Lajoie, Moo)
+      <br>번역 <a href="https://sunbeamktw.github.io/BirCon/">김태원</a></p>
+  </body>
+</html>
