@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>
+      CppPrimer
+    </title>
+    <link rel="icon" href="../favicon.ico">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+      href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/github-dark.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+    <center>
+    <a href="../index.html"><h3>C++ 기초</h3></a>      
+    <hr width="50%" noshade>
+    </center>
+    
+    <div class="row">
+      <div class="left">
+        <ol>
+          <li><mark id="red">시작</mark></li>
+        <li><a href="../1/0.html">기본</a></li>
+        <li><a href="../3/0.html">문자열, 벡터, 배열</a></li>
+        <li><a href="../4/0.html">표현식</a></li>
+        <li><a href="../5/0.html">문장</a></li>
+        <li><a href="../6/0.html">함수</a></li>
+        <li><a href="../7/0.html">클래스</a></li>
+        <li><a href="../8/0.html">IO 라이브러리</a></li>
+        <li><a href="../9/0.html">순차 컨테이너</a></li>
+        <li><a href="../10/0.html">제네릭 알고리즘</a></li>
+        <li><a href="../11/0.html">연관 컨테이너</a></li>
+        <li><a href="../12/0.html">동적 메모리</a></li>
+        <li><a href="../13/0.html">복사 제어</a></li>
+        <li><a href="../14/0.html">연산자 오버로드 및 변환</a></li>
+        <li><a href="../15/0.html">객체 지향 프로그래밍</a></li>
+        <li><a href="../16/0.html">템플릿과 제네릭 프로그래밍</a></li>
+        <li><a href="../17/0.html">라이브러리 특수 기능</a></li>
+        <li><a href="../18/0.html">대형 프로그램 도구</a></li>
+        <li><a href="../19/0.html">특수 도구 및 기법</a></li>
+      </ol> 
+      <ul>
+        <li>부록 <a href="../A/html">라이브러리</a></li>
+      </ul>
+      </div>
+      
+      <div class="center">
+        <ol>
+          <li><a href="1.1.html">간단한 C++ 프로그램 작성</a></li>
+          <li><a href="1.2.html">입력/출력 소개</a></li>
+          <li><a href="1.3.html">주석에 관해</a></li>
+          <li><a href="1.4.html">제어의 흐름</a></li>
+          <li><mark id="red">클래스 소개</mark></li>
+          <li><a href="1.6.html">서점 프로그램</a></li>
+        </ol>
+        <ul>
+          <li><a href="1.a.html">단원 요약</a></li>
+          <li><a href="1.b.html">용어 정리</a></li>
+        </ul>
+      </div>
+      
+      <div class="right">
+        <ol>
+          <li><mark id="red">Sales_item 클래스</mark></li>
+          <li><a href="1.5.2.html">멤버 함수 소개</a></li>
+        </ol>
+      </div>
+    </div>
+    
+    <hr width="100%" noshade>
+<p><mark>Sales_item</mark> 클래스의 목표는 총수입, 판매 횟수, 권당 평균 판매가를 표현하는 것이다. 이들 데이터가 어떻게 저장되고 계산되는지는 우리 알 바가 아니다. 클래스를 사용하려면, 구현 방식에는 신경 쓰지 말아야 한다. 대신, 우리가 알아야 하는 것은 그 타입의 객체가 수행할 수 있는 동작이다.</p>
+
+<p>모든 클래스는 타입을 정의한다. 타입의 이름은 클래스의 이름과 같다. 따라서 <mark>Sales_item</mark> 클래스는 <mark>Sales_item</mark>이라는 이름의 타입을 정의한다. 내장형 타입과 마찬가지로 우리는 클래스 타입의 변수를 정의할 수 있다. 아래 라인에서 <mark>item</mark>은 <mark>Sales_item</mark> 타입의 객체다.</p>
+
+<pre><code>Sales_item item;</code></pre>
+
+<p>우리는 종종 “<mark>Sales_item</mark> 타입의 객체”라고 하거나 “<mark>Sales_item</mark> 객체”, 더 단순하게는 “<mark>Sales_item</mark>”이라고 말한다.</p>
+
+<p><mark>Sales_item</mark> 타입의 변수를 정의할 수 있게 되면서, 우리는 다음과 같은 것들을 할 수 있게 되었다.</p>
+
+<ul>
+<li><mark>Sales_item</mark> 객체에서 <mark>isbn</mark>이라는 이름의 함수를 호출한다.</li>
+<li>입력(<mark>>></mark>) 및 출력(<mark><<</mark>) 연산자를 사용해 <mark>Sales_item</mark> 타입의 객체를 읽고 쓴다.</li>
+<li>대입(<mark>=</mark>) 연산자를 이용해 하나의 <mark>Sales_item</mark> 객체를 다른 것에 대입한다.</li>
+<li>두 <mark>Sales_item</mark> 객체를 합치기 위한 결합(<mark>+</mark>) 연산자를 사용한다. 두 객체는 같은 ISBN을 가리켜야 하며, 결과는 ISBN이 그 피연산자이며 책이 팔린 횟수와 총수입이 그 피연산자에서 대응하는 값의 합인 새로운 <mark>Sales_item</mark> 객체다.</li> 
+<li>하나의 <mark>Sales_item</mark> 객체를 다른 것에 더하기 위한 복합 대입(<mark>+=</mark>) 연산자를 사용한다.</li>
+
+<hr width="100%" noshade>
+<h3>핵심 개념: 클래스는 행동을 정의한다.</h4>
+<p>이들 프로그램을 읽을 때 주의할 점은 바로 <mark>Sales_item</mark> 클래스의 저자가 이 클래스의 객체로 수행될 수 있는 <b>모든</b> 행동을 정의한다는 점이다. 즉, <mark>Sales_item</mark> 클래스는 <mark>Sales_item</mark> 객체가 생성되었을 때 일어나는 일과 대입, 결합, 입출력이 <mark>Sales_item 객체들에 적용될 때 일어나는 일을 정의한다는 것이다.</p>
+
+<p>일반적으로, 클래스 저자는 그 클래스 타입의 객체상에서 있을 수 있는 동작을 전부 정의한다. 지금으로서 <mark>Sales_item</mark> 객체상에서 수행할 수 있는 연산은 위에서 언급한 것들뿐이다.</p>
+<hr width="100%" noshade>
+
+<p><mark>Sales_item</mark> 객체에서 쓸 수 있는 연산을 알기에, 우리는 클래스를 사용하는 프로그램을 작성할 수 있다. 가령 아래 프로그램은 표준 입력을 통해 데이터를 <mark>Sales_item</mark> 객체에 읽어 들이고 이 <mark>Sales_item</mark> 객체를 표준 출력으로 내보낸다.</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include “Sales_item.h”
+int main()
+{
+	Sales_item book;
+	// read ISBN, number of copies sold, and sales price
+	std::cin >> book;
+	// write ISBN, number of copies sold, total revenue, and average price
+	std::cout << book << std::endl;
+	return 0;
+}</code></pre>
+
+<p>프로그램의 입력이 다음과 같으면</p>
+
+<pre><code>0-201-70353-X 4 24.99</code></pre>
+
+<p>출력은 다음과 같을 것이다.</p>
+
+<pre><code>0-201-70353-X 4 99.96 24.99</code></pre>
+
+<p>우리의 입력은 우리가 네 권의 책을 각각 $24.99에 팔았다고 말한다. 그리고 출력은 팔린 총 횟수는 4이고, 총수입은 $99.96, 책당 평균 가격은 $24.99라는 것을 암시한다.</p>
+
+<p>이 프로그램은 두 <mark>#include</mark> 지시사로 시작한다. 하나는 새로운 형식을 취한다. 표준 라이브러리의 헤더는 꺽쇠(<mark>< ></mark>)로 묶인다. 표준 라이브러리의 일부분이 아니라면 큰따옴표(<mark>“ “</mark>)로 묶인다.</p>
+
+<p><mark>main</mark> 안에서 우리는 <mark>book</mark>이라는 객체를 정의한다. 표준 입력에서 읽어 들이는 데이터를 취하기 위한 것이다. 다음 문장은 그 객체로 읽어 들이고, 세 번째 문장은 이를 표준 출력에 내보내고 <mark>endl</mark>을 내보낸다.
+
+<h3><mark>Sales_item</mark> 객체들 결합하기</h3>
+
+더 흥미로운 예제는 두 <mark>Sales_item</mark> 객체를 더하는 것이다.
+<pre><code>#include &lt;iostream&gt;
+#include “Sales_item.h”
+int main()
+{
+	Sales_item item1, item2;
+	std::cin >> item1 >> item2;	// read a pair of transactions
+	std::cout << item1 + item2 << std::endl;	// print their sum
+	return 0;
+}</code></pre>
+
+여기 다음처럼 입력한다면
+<pre><code>0-201-78345-X 3 20.00
+0-201-78345-X 2 25.00</code></pre>
+
+출력은 다음과 같다.
+<pre><code>0-201-78345-X 5 110 22</code></pre>
+
+<p>이 프로그램은 <mark>Sales_item</mark>과 <mark>iostream</mark> 헤더를 포함하는 것으로 시작한다. 그런 다음 두 <mark>Sales_item</mark> 객체를 정의하여 거래 명세를 취한다. 우리는 표준 출력에서 이들 객체로 데이터를 읽는다. 출력 표현식은 결합을 수행하고 결과를 출력한다.</p>
+
+<p>우리는 이 프로그램이 <a href="https://sunbeamktw.github.io/CppPrimer/1/1.2.html">1.2</a>에서 본 프로그램과 유사하다는 점에 주목할 필요가 있다. 우리는 두 입력을 읽고 그것의 합을 쓴다. 여기 주목할 만한 이유는 이것이 두 정수를 읽고 쓰는 일 대신, 우리는 두 <mark>Sales_item</mark> 객체의 합을 읽고 쓰기 때문이다. 더군다나, “합’이라는 개념 자체가 다르다. int의 경우 우리는 통상적인 합을 조성하는 것이다. 즉 두 수적인 값을 더한 것의 결과를 만드는 것이다. 한편 Sales_item의 경우 우리는 합의 개념적으로 새로운 의미를 사용한다. 즉 두 <mark>Sales_item</mark> 객체의 구성원을 합친 것의 결과가 조성되는 것이다.</p>
+<hr width="100%" noshade>
+
+<h3>연습문제 1.5.1</h3>
+<b>연습문제 1.20</b> <a href="http://www.informit.com/title/032174113">http://www.informit.com/title/032174113</a>에는 <mark>Sales_item.h</mark>가 있다. 이를 당신의 디렉터리로 복사할 것. 서점 판매 내역을 표준 출력에 쓰는 프로그램을 작성할 것.
+<b>연습문제 1.21</b> 같은 ISBN의 두 <mark>Sales_item</mark> 객체를 읽고 그 합을 만들어내는 프로그램을 작성할 것.
+<b>연습문제 1.22</b> 같은 ISBN의 여러 매매 내역을 읽는 프로그램을 작성할 것. 읽은 매매 내역의 총합을 작성할 것.
+
+
+
+
+    <hr width="100%" noshade>
+    <p style="text-align:right;">
+      <a href="http://www.charleshouserjr.com/Cplus2.pdf">C++ Primer 5th Edition</a>
+      (Lippman, Lajoie, Moo)
+      <br>번역 <a href="https://sunbeamktw.github.io/BirCon/">김태원</a></p>
+  </body>
+</html>
