@@ -76,31 +76,31 @@
 <p><mark>total</mark>이라는 이름의 변수 속 각 ISBN의 데이터를 조합할 것. 읽어 들인 거래 명세 각각을 취하기 위한 두 번째 변수 <mark>trans</mark> 사용. 만약 <mark>trans</mark>와 <mark>total</mark>이 가리키는 ISBN이 같다면 <mark>total</mark>을 업데이트할 것. 아니라면 <mark>total</mark>을 출력한 다음 방금 읽어 들인 거래 명세를 이용해 재설정할 것.</p>
 
 <pre><code>#include &lt;iostream&gt;
-#include “Sales_item.h”
+#include "Sales_item.h"
 int main()
 {
-	  Sales_item total;	// variable to hold data for the next transaction
-	  // read the first transaction and ensure that there are data to process
-	  if (std::cin >> total){
-		  Sales_item trans;	// variable to hold the running sum
-		  // read and process the remaining transactions
-		  while (std::cin >> trans){
-			  // if we’re still processing the same book
-			  if (total.isbn() == trans.isbn())
-				  total += trans;	// update the running total
-			  else {
-				  // print results for the previousbook
-				  std::cout << total << std::endl;
-				  total = trans;	// total now refers to the next book
-        			}
-      			}
-      			std::cout << total << std::endl;	// print the last transaction
-    				}else {
-	   	 		// no input! warn the user
-	   	 		std::cerr << “No data?!” << std::endl;
-	   	 		return -1;	// indicate failure
-    				}
-    	return 0;
+	Sales_item total; // variable to hold data for the next transaction
+	// read the first transaction and ensure that there are data to process
+	if (std::cin >> total){
+		Sales_item trans; // variable to hold the running sum
+		// read and process the remaining transactions
+		while (std::cin >> trans){
+			// if we're still processing the same book
+			if (total.isbn() == trans.isbn())
+				total += trans; // update the running total
+			else {
+				// print results for the previous book
+				std::cout << total << std:L:endl;
+				total = trans; // total now refers to the next book
+			}
+		}
+		std:: cout << total << std::endl; // print the last transaction
+	} else {
+		// no input! warn the user
+		std::cerr << "No data?!" << std::endl;
+		return -1; // indicate failure
+	}
+	return 0;
 }</code></pre>
 <p>이 프로그램은 지금껏 본 것 가운데 가장 복잡하다. 하지만 지금껏 봐 온 기능만 사용한다.</p>
 
