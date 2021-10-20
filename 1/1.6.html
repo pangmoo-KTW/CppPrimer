@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>
+      CppPrimer
+    </title>
+    <link rel="icon" href="../favicon.ico">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+      href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/github-dark.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+    <center>
+    <a href="../index.html"><h3>C++ 기초</h3></a>      
+    <hr width="50%" noshade>
+    </center>
+    
+    <div class="row">
+      <div class="left">
+        <ol>
+          <li><makr id="red">시작</mark></li>
+        <li><a href="../2/0.html">기본</a></li>
+        <li><a href="../3/0.html">문자열, 벡터, 배열</a></li>
+        <li><a href="../4/0.html">표현식</a></li>
+        <li><a href="../5/0.html">문장</a></li>
+        <li><a href="../6/0.html">함수</a></li>
+        <li><a href="../7/0.html">클래스</a></li>
+        <li><a href="../8/0.html">IO 라이브러리</a></li>
+        <li><a href="../9/0.html">순차 컨테이너</a></li>
+        <li><a href="../10/0.html">제네릭 알고리즘</a></li>
+        <li><a href="../11/0.html">연관 컨테이너</a></li>
+        <li><a href="../12/0.html">동적 메모리</a></li>
+        <li><a href="../13/0.html">복사 제어</a></li>
+        <li><a href="../14/0.html">연산자 오버로드 및 변환</a></li>
+        <li><a href="../15/0.html">객체 지향 프로그래밍</a></li>
+        <li><a href="../16/0.html">템플릿과 제네릭 프로그래밍</a></li>
+        <li><a href="../17/0.html">라이브러리 특수 기능</a></li>
+        <li><a href="../18/0.html">대형 프로그램 도구</a></li>
+        <li><a href="../19/0.html">특수 도구 및 기법</a></li>
+      </ol> 
+      <ul>
+        <li>부록 <a href="../A/html">라이브러리</a></li>
+      </ul>
+      </div>
+      
+      <div class="center">
+        <ol>
+          <li><a href="1.1.html">간단한 C++ 프로그램 작성</a></li>
+          <li><a href="1.2.html">입력/출력 소개</a></li>
+          <li><a href="1.3.html">주석에 관해</a></li>
+          <li><a href="1.4.html">제어의 흐름</a></li>
+          <li><a href="1.5.html">클래스 소개</a></li>
+          <li><mark id="red">서점 프로그램</mark></li>
+        </ol>
+        <ul>
+          <li><a href="1.a.html">단원 요약</a></li>
+          <li><a href="1.b.html">용어 정리</a></li>
+        </ul>
+      </div>
+      
+      <div class="right">
+        <ol>
+     
+        </ol>
+      </div>
+    </div>
+    
+    <hr width="100%" noshade>
+    <p>서점 프로그램 해결 준비 끝. 우리가 해야할 일은 크게 두 가지다. 거래 명세 파일 읽기와 책, 총 판매수, 총수익, 평균 판매가에 따른 보고 생산. 이에 앞서 각 ISBN의 거래 명세가 전부 입력상에서 묶인다고 가정한다.</p>
+
+<p><mark>total</mark>이라는 이름의 변수 속 각 ISBN의 데이터를 조합할 것. 읽어 들인 거래 명세 각각을 취하기 위한 두 번째 변수 <mark>trans</mark> 사용. 만약 <mark>trans</mark>와 <mark>total</mark>이 가리키는 ISBN이 같다면 <mark>total</mark>을 업데이트할 것. 아니라면 <mark>total</mark>을 출력한 다음 방금 읽어 들인 거래 명세를 이용해 재설정할 것.</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include “Sales_item.h”
+int main()
+{
+	  Sales_item total;	// variable to hold data for the next transaction
+	  // read the first transaction and ensure that there are data to process
+	  if (std::cin >> total){
+		  Sales_item trans;	// variable to hold the running sum
+		  // read and process the remaining transactions
+		  while (std::cin >> trans){
+			  // if we’re still processing the same book
+			  if (total.isbn() == trans.isbn())
+				  total += trans;	// update the running total
+			  else {
+				  // print results for the previousbook
+				  std::cout << total << std::endl;
+				  total = trans;	// total now refers to the next book
+        }
+      }
+      std::cout << total << std::endl;	// print the last transaction
+    }else {
+	    // no input! warn the user
+	    std::cerr << “No data?!” << std::endl;
+	    return -1;	// indicate failure
+    }
+    return 0;
+}</code></pre>
+<p>이 프로그램은 지금껏 본 것 가운데 가장 복잡하다. 하지만 지금껏 봐 온 기능만 사용한다.</p>
+
+<p>평소처럼 <mark>iostream</mark>과 <mark>Sales_item.h</mark> 헤더 포함으로 시작한다. <mark>main</mark> 안에서는 <mark>total</mark>이라는 이름의 객체를 정의한다. 이는 주어진 ISBN에 대한 데이터를 합치기 위한 것이다. 또 <mark>total</mark>에 첫 번째 거래 명세를 읽어 들인 다음 성공적으로 읽었는지 확인하는 것으로 시작한다. 실패했다면 레코드가 없다는 뜻이다. 이어서 외부 <mark>else</mark> 분기로 떨어져 나간다. 이는 사용자에게 입력이 없었다는 것을 알린다.</p>
+
+<p>성공적으로 레코드를 읽었다고 가정하며 외부 <mark>if</mark>에서 이어지는 블록을 실행한다. 이 블록은 <mark>trans</mark>라는 이름의 객체를 정의하는 것으로 시작한다. 이는 읽어 들이는 과정에서 거래 명세를 취할 것이다. <mark>while</mark> 문장은 남은 레코드를 전부 읽어 들일 것이다. 지금까지의 프로그램과 마찬가지로, <mark>while</mark> 조건은 표준 입력에서 값을 읽어 들인다. 이 경우는 <mark>Sales_item</mark> 객체를 <mark>trans</mark>에 읽어 들인다. 성공적으로 읽었다면 <mark>while</mark>의 몸체를 실행한다.</p>
+
+<p><mark>while</mark> 몸체는 단일 <mark>if</mark> 문장이다. <mark>if</mark>는 ISBN이 상등인지 확인한다. 만약 그렇다면 복합 대입 연산자를 사용해 <mark>total</mark>에 <mark>trans</mark>를 합한다. ISBN이 상등이 아니라면 <mark>total</mark>에 저장된 값을 출력하고 <mark>trans</mark>를 대입하는 것으로 <mark>total</mark>을 재설정한다. <mark>if</mark> 실행 이후에는 <mark>while</mark> 조건으로 돌아와 다음 거래 명세를 읽는다. 그리고 이를 레코드가 바닥날 때까지 계속한다.</p>
+
+<p><mark>while</mark>이 종결될 때 <mark>total</mark>은 지난 ISBN의 데이터를 포함한다. 우리는 외부 <mark>if</mark> 문장을 포함하는 블록의 마지막 문장 속의 지난 ISBN의 데이터를 쓴다.</p>
+    
+<hr width="100%" noshade>
+    <p style="text-align:right;">
+      <a href="http://www.charleshouserjr.com/Cplus2.pdf">C++ Primer 5th Edition</a>
+      (Lippman, Lajoie, Moo)
+      <br>번역 <a href="https://sunbeamktw.github.io/BirCon/">김태원</a></p>
+  </body>
+</html>
