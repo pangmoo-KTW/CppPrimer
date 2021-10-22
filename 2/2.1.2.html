@@ -88,14 +88,14 @@ unsigned char c = -1;	// assuming 8-bit chars. c has value 255
 signed char c2 = 256;	// assuming 8-bit chars, the value of c2 is undefined</code></pre>
 
 <p>일어나는 일은 타입이 허용하는 값의 범위에 의존한다.</p> 
-<ol>
+<ul>
 <li><mark>bool</mark>이 아닌 산술 타입을 <mark>bool</mark> 객체에 대입할 때, 값이 0이면 결과는 <mark>false</mark>이고 0이 아니면 결과는 <mark>true</mark>이다.</li>
 <li><mark>bool</mark>을 <mark>bool</mark>이 아닌 다른 산술 타입에 대입할 때, <mark>bool</mark>이 <mark>true</mark>면 값은 1이고 <mark>bool</mark>이 <mark>false</mark>면 값은 0이다.</li>
 <li>부동소수점 타입 값을 정수 타입 객체에 대입할 때, 값은 절삭된다. 저장되는 값은 소수점 이전의 값이다.</li>
 <li>정수 값을 부동소수점 타입에 대입할 때, 소수부는 0이다. 정수가 부동소수점 객체가 다룰 수 있는 것보다 더 많은 비트를 갖는다면 정밀도는 상실될 수 있다.</li>
 <li>범위 바깥의 값을 부호 없는 타입의 객체에 대입하면, 결과는 목표 타입 범위에 대한 값의 나머지다. 가령 8비트 <mark>unsigned char</mark>는 0에서 255까지의 값을 취할 수 있다. 이 범위 밖에서 값을 대입하면, 컴파일러는 256에 대한 나머지 값을 대입한다. 따라서 -1을 8비트 <mark>unsigned char</mark>에 대입하면 255가 값이 된다.</li>
 <li>범위 바깥의 값을 부호 있는 타입의 객체에 대입할 때의 결과는 <b>정의되지 않았다</b>. 프로그램은 돌아가는 것처럼 보일 수도 있고, 망가질 수도 있고, 쓰레기 값을 생산할 수도 있다.</li>
-</ol>
+</ul>
 
 <hr width="100%" noshade>
 
