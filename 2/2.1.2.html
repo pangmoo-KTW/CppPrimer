@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>
+      CppPrimer
+    </title>
+    <link rel="icon" href="../favicon.ico">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+      href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/qtcreator-dark.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+    <center>
+    <a href="../index.html"><h3>C++ 기초</h3></a>      
+    <hr width="50%" noshade>
+    </center>
+    
+    <div class="row">
+      <div class="left">
+        <ol>
+          <li><a href="../1/0.html">시작</a></li>
+        <li><mark id="red">기본</mark></li>
+        <li><a href="../3/0.html">문자열, 벡터, 배열</a></li>
+        <li><a href="../4/0.html">표현식</a></li>
+        <li><a href="../5/0.html">문장</a></li>
+        <li><a href="../6/0.html">함수</a></li>
+        <li><a href="../7/0.html">클래스</a></li>
+        <li><a href="../8/0.html">IO 라이브러리</a></li>
+        <li><a href="../9/0.html">순차 컨테이너</a></li>
+        <li><a href="../10/0.html">제네릭 알고리즘</a></li>
+        <li><a href="../11/0.html">연관 컨테이너</a></li>
+        <li><a href="../12/0.html">동적 메모리</a></li>
+        <li><a href="../13/0.html">복사 제어</a></li>
+        <li><a href="../14/0.html">연산자 오버로드 및 변환</a></li>
+        <li><a href="../15/0.html">객체 지향 프로그래밍</a></li>
+        <li><a href="../16/0.html">템플릿과 제네릭 프로그래밍</a></li>
+        <li><a href="../17/0.html">라이브러리 특수 기능</a></li>
+        <li><a href="../18/0.html">대형 프로그램 도구</a></li>
+        <li><a href="../19/0.html">특수 도구 및 기법</a></li>
+      </ol> 
+      <ul>
+        <li>부록 <a href="../A/html">라이브러리</a></li>
+      </ul>
+      </div>
+      
+      <div class="center">
+        <ol>
+          <li><mark id="red">원시 내장형 타입</mark></li>
+          <li><a href="2.2.html">변수</a></li>
+          <li><a href="2.3.html">복합 타입</a></li>
+          <li><a href="2.4.html">const 형식 한정자</a></li>
+          <li><a href="2.5.html">타입 다루기</a></li>
+          <li><a href="2.6.html">우리만의 자료구조 정의</a></li>
+        </ol>
+        <ul>
+          <li><a href="2.a.html">단원 요약</a></li>
+          <li><a href="2.b.html">용어 정리</a></li>
+        </ul>
+      </div>
+      
+      <div class="right">
+        <ol>
+          <li><a href="2.1.1.html">산술 타입</a></li>
+          <li><mark id="red">타입 변환</mark></li>
+          <li><a href="2.1.3.html">리터럴</a></li>
+        </ol>
+      </div>
+    </div>
+    
+    <hr width="100%" noshade>
+    
+    <p>객체의 타입은 객체가 포함할 수 있는 데이터와 그 객체로 가능한 연산을 결정한다. 이처럼 많은 타입이 지원할 수 있는 연산으로는 주어진 타입의 객체를 다른 연관된 타입으로 <b>변환할</b> 수 있는 능력이다.</p>
+
+<p>타입 변환은 우리가 한 타입의 객체를 다른 타입의 객체가 적절할 때 사용하면 자동적으로 일어난다. §4.11에서 더 얘기하겠지만, 지금으로서는 한 타입의 값을 다른 타입의 객체에 대입했을 때 일어나는 일을 이해하는 것이 유용하겠다.</p>
+
+<p>아래처럼 하나의 산술 타입을 다른 것에 대입할 때</p>
+
+<pre><code>bool b = 42;	// b is true
+int i = b;	// i has value 1
+i = 3.14;	// i has value 3
+double pi = i;	// pi has value 3.0
+unsigned char c = -1;	// assuming 8-bit chars. c has value 255
+signed char c2 = 256;	// assuming 8-bit chars, the value of c2 is undefined</code></pre>
+
+<p>일어나는 일은 타입이 허용하는 값의 범위에 의존한다.</p> 
+<ol>
+<li><mark>bool</mark>이 아닌 산술 타입을 <mark>bool</mark> 객체에 대입할 때, 값이 0이면 결과는 <mark>false</mark>이고 0이 아니면 결과는 <mark>true</mark>이다.</li>
+<li><mark>bool</mark>을 <mark>bool</mark>이 아닌 다른 산술 타입에 대입할 때, <mark>bool</mark>이 <mark>true</mark>면 값은 1이고 <mark>bool</mark>이 <mark>false</mark>면 값은 0이다.</li>
+<li>부동소수점 타입 값을 정수 타입 객체에 대입할 때, 값은 절삭된다. 저장되는 값은 소수점 이전의 값이다.</li>
+<li>정수 값을 부동소수점 타입에 대입할 때, 소수부는 0이다. 정수가 부동소수점 객체가 다룰 수 있는 것보다 더 많은 비트를 갖는다면 정밀도는 상실될 수 있다.</li>
+<li>범위 바깥의 값을 부호 없는 타입의 객체에 대입하면, 결과는 목표 타입 범위에 대한 값의 나머지다. 가령 8비트 <mark>unsigned char</mark>는 0에서 255까지의 값을 취할 수 있다. 이 범위 밖에서 값을 대입하면, 컴파일러는 256에 대한 나머지 값을 대입한다. 따라서 -1을 8비트 <mark>unsigned char</mark>에 대입하면 255가 값이 된다.</li>
+<li>범위 바깥의 값을 부호 있는 타입의 객체에 대입할 때의 결과는 <b>정의되지 않았다</b>. 프로그램은 돌아가는 것처럼 보일 수도 있고, 망가질 수도 있고, 쓰레기 값을 생산할 수도 있다.</li>
+</ol>
+
+<hr width="100%" noshade>
+
+<h3>조언: 정의되지 않은, 또 구현에 따라 정의되는 행동 피하기</h3>
+<p>정의되지 않은 행동은 컴파일러가 다룰 의무가 없는 (또 다룰 수 없는) 오류에서 비롯하는 결과다. 코드가 컴파일되더라도, 정의되지 않은 표현식을 실행하는 프로그램은 오류다.</p>
+
+<p>불행히도 정의되지 않은 행동을 포함하는 프로그램은 어떤 상황이나 어떤 컴파일러에 정확하게 작동하는 것처럼 보일 수도 있다. 다른 컴파일러나 다른 판본의  컴파일러에서 컴파일된 같은 프로그램이 제대로 작동할 것이라는 보장이 없다. 일군의 입력이 다른 곳에도 마찬가지로 적용된다는 보장도 없다.</p>
+
+<p>유사하게, 프로그램은 구현에 따라 정의되는 행동을 피해야 한다. <mark>int</mark>의 크기가 고정되었고 알려진 값이라고 가정해서는 안 된다는 말이다. 그런 프로그램은 <b>이식성이 없다고(nonportable)</b> 한다. 프로그램을 하나의 장치에서 다른 장치로 옮겼을 때, 구현에 따라 정의되는 행동에 의존한 코드는 실패할 것이다. 이런 문제들을 뒤좇는 일은 좋게 말해 불쾌하다.</p>
+
+<hr width="100%" noshade>
+
+<p>컴파일러는 다른 연산 타입이 적절한 상황에서 한 연산 타입의 값을 사용할 때 이와 같은 타입 변환을 적용한다. 가령 우리가 <mark>bool</mark>이 아닌 값을 조건으로 사용할 때 연산 값은 <mark>bool</mark>로 변환된다. 이는 아래 경우도 마찬가지다.</p>
+
+<pre><code>int i = 42;
+if (i)	// condition will evaluate as true
+	i = 0;</code></pre>
+
+<p>값이 0이라면, 조건은 <mark>false</mark>일 것이다. 여타 (0이 아닌) 값은 <mark>true</mark>를 취할 것이다.</p>
+
+<p>이와 마찬가지로 <mark>bool</mark>을 연산 표현식에 사용할 때, 그 값은 항상 0 또는 1로 변환될 것이다. 결과적으로 <mark>bool</mark>을 연산 표현식에 사용하는 것은 대부분 분명 옳지 못하다.</p>
+
+<h3>기호 없는 타입을 포함하는 표현식</h3>
+<p>음의 값을 기호 없는 타입의 객체에 의도적으로 대입하는 일은 상상하기 어렵지만, 종종 (쉽게) 암시적으로 그런 코드를 작성하기도 한다. 가령 <mark>unsigned</mark>와 <mark>int</mark>를 같은 연산 표현식에 사용하면, <mark>int</mark> 값은 일반적으로 <mark>unsigned</mark>로 변환된다. <mark>int</mark>를 <mark>unsigned</mark>로 변환하는 것은 <mark>int</mark>를 <mark>unsigned</mark>로 대입하는 것과 같다.</p>
+
+<pre><code>unsigned u = 10;
+int i = -42;
+std::cout << i + i << std::endl;		// prints - 84
+std::cout << u + i << std::endl;	// if 32-bit ints, prints 4294967264</code></pre>
+
+<p>첫 번째 표현식에서는 두 (음의) <mark>int</mark> 값을 하고 예상할 수 있는 값을 얻는다. 두 번째 표현식에서는 <mark>int</mark> 값인 -42는 덧셈 이전에 <mark>unsigned</mark>로 변환된다. 음수를 <mark>unsigned</mark>로 변환하는 것은 우리가 음수를 <mark>unsigned</mark> 객체에 대입하려는 것과 같은 결과를 만든다. 값은 위 경우처럼 “둘러서 나온다”. </p>
+
+<p>하나 또는 두 피연산자에 부호가 없는 것과 무관하게 우리가 <mark>unsigned</mark>에서 값을 뺐을 때 결과가 음수가 될 수 없다는 것을 자각해야 한다.</p>  
+
+<pre><code>unsigned u1 = 42, u2 = 10;
+std::cout << u1 - u2 << std::endl;	// ok: result is 32
+std::cout << u2 - u1 << std::endl;	// ok: but the result will wrap around</code></pre>
+
+<p><mark>unsigned</mark>가 0보다 적을 수 없다는 점은 루프 작성 방법에도 영향을 끼친다. 가령 §1.4.1처럼 10에서 0까지 줄어드는 루프를 작성하고자 했었다. 루프는 아래와 같을 것이다.</p>
+
+<pre><code>for (int i = 10; i >= 0; --i)
+	std::cout << i << std::endl;</code></pre>
+
+<p>이를 <mark>unsigned</mark>를 이용해서 이 루프를 재작성할 수 있다고 생각할 수도 있겠다. 결국, 우리는 음수를 출력하고자 하지 않는다. 다만 이 단순한 변화는 끝 없는 루프를 유도할 수 있다.</p>
+
+<pre><code>// WRONG:u can never be less than 0; the condition will always succeed
+for (unsigned u = 10; u >= 0; --u)
+	std::cout << u << std::endl;</code></pre>
+
+<p><mark>u</mark>가 0일 때 일어나는 일을 생각해보라. 그 반복에서는 0을 출력한 다음 <mark>for</mark> 루프 안의 표현식을 호출한다. 표현식 <mark>--u</mark>는 <mark>u</mark>에서 1을 뺀다. 결과는 -1인데, <mark>unsigned</mark> 값에 맞지 않는다. 여타 범위 바깥의 값과 마찬가지로 -1은 <mark>unsigned</mark> 값으로 변형된다. 32비트 <mark>int</mark>를 고려했을 때 <mark>u</mark>가 0일 때의 <mark>--u</mark>의 값은 <mark>4294967295</mark>가 된다.</p>
+
+<p>이 루프를 작성하는 한 가지 방법은 <mark>for</mark> 대신 <mark>while</mark>을 쓰는 것이다. <mark>while</mark>을 사용하는 것은 값 출력 (이후가 아니라) 이전에 값이 감소하도록 한다. </p>
+
+<pre><code>unsigned u = 11;	// start the loop one past the first element we want to print
+while ( u > 0 ) {
+	--u;	// decrement first, so that the last iteration will print 0
+	std::cout << u << std::endl;
+}</code></pre>
+
+<p>이 루프는 루프 제어 변수의 값을 감소하는 것으로 시작한다. 마지막 반복에서 <mark>u</mark>는 루프 도입부에서 1이 될 것이다. 이어서 이 값을 감소시킬 것인데, 이는 이 반복에서 0을 출력한다는 뜻이다. 그런 다음 <mark>while</mark> 조건의 <mark>u</mark>를 검사할 때, 그 값은 0일 것이며 루프는 끝날 것이다. <mark>u</mark>를 감소하며 시작하기에, 출력하려는 것보다 하나 더 큰 값으로 초기화해야 한다. 첫 번째 출력값이 10이려면 <mark>u</mark>를 11로 초기화해야 한다.</p>
+
+<hr width="100%" noshade>
+<h3>경고: <mark>Signed</mark>와 <mark>unsigned</mark>를 섞지 말 것</h3>
+<p>부호 있는 값이 음수일 때 부호 있는 값과 부호 없는 값을 섞었다가는 믿기 어려운 값을 얻을 수 있다. 표기 있는 값이 자동적으로 표기 없는 값으로 변환된다는 사실을 잊지 않는 것이 중요하다. <mark>a * b</mark> 같은 표현식에서 <mark>a</mark>가 -1이고 <mark>b</mark>가 1인 데다 <mark>int</mark>라면, 값은 예상할 수 있는 것처럼 -1이다. 하지만 만약 <mark>a</mark>가 <mark>int</mark>이고 <mark>b</mark>가 <mark>unsigned</mark>라면 표현식의 값은 <mark>int</mark>가 특정 기계에서 갖는 비트 수에 의존한다. 우리의 기계에서 이 표현식은 4294967295를 취한다.</p>
+<hr width="100%" noshade>
+
+<h3>연습문제 2.1.2</h3>
+<p><b>연습문제 2.3</b> 아래 코드는 무엇을 출력하는가?</p>
+<pre><code>unsigned u = 10, u2 = 42;
+std::cout << u2 - u << std::endl;
+std::cout << u - u2 << std::endl;
+
+int i = 10, i2 = 42;
+std::cout << i2 - i << std::endl;
+std::cout << i - i2 << std::endl;
+
+std::cout << i - u << std::endl;
+std::cout << u - i << std::endl;</code></pre>
+
+<p><b>연습문제 2.4</b> 당신의 예상이 맞는지 프로그램을 작성해볼 것. 틀렸다면 이해할 수 있을 때까지 이번 장을 공부할 것.</p>
+
+  <hr width="100%" noshade>
+    <p style="text-align:right;">
+      <a href="http://www.charleshouserjr.com/Cplus2.pdf">C++ Primer 5th Edition</a>
+      (Lippman, Lajoie, Moo)
+      <br>번역 <a href="https://sunbeamktw.github.io/BirCon/">김태원</a></p>
+  </body>
+</html>
