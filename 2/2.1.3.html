@@ -96,7 +96,7 @@
 <h3>문자와 문자 스트링 리터럴</h3>
 <p>작은 따옴표로 묶인 문자는 <mark>char</mark> 타입 리터럴이다. 큰따옴표로 묶인 0개 이상의 문자는 스트링 리터럴을 표시한다.</p>
 
-<pre><code>'a'		// 문자 리터럴
+<pre><code>'a'			// 문자 리터럴
 "Hello World!"		// 스트링 리터럴</code></pre>
 
 <p>스트링 리터럴의 타입은 <mark>char</mark> 상수의 <b>배열(array)</b>로, <a href="../3/3.5.4.html">§3.5.4</a>에서 다룰 것이다. 컴파일러는 모든 스트링 리터럴에 널 문자(‘<mark>\0</mark>’)를 덧붙인다. 따라서 스트링 리터럴의 실제 크기는 원래 크기에서 하나를 더한 것이다. 가령 리터럴 ‘<mark>A</mark>’는 단일 문자 <mark>A</mark>를 표현하는 반면 스트링 리터럴 “<mark>A</mark>”는 문자 <mark>A</mark>와 널 캐릭터로 구성되는 두 문자의 배열을 표현한다.</p>
@@ -110,7 +110,7 @@ std::cout << “a really, really long string literal “
 <h3>이스케이프 시퀀스</h3>
 <p>백스페이스나 제어 문자와 같은 문자들은 시각적인 이미지를 갖지 않는다. 이와 같은 문자들은 <b>출력 불가능(nonprintable)</b>하다. (작은따옴표, 큰따옴표, 물음표, 백슬래시 같은) 다른 문자들은 언어에서 특수한 의미를 차지한다. 프로그램은 이들 문자를 직접적으로 사용할 수 없다. 대신 <b>이스케이프 시퀀스(escape sequence)</b>를 이용해 이런 문자를 표현한다. 이스케이프 시퀀스는 백슬래시로 시작한다. 언어는 몇 가지 이스케이프 시퀀스를 정의한다.</p>
 
-<pre><code>newline			\n	horizontal tab		\t	alert(bell)	\a
+<pre><code>newline			\n	horizontal tab		\t	alert(bell)		\a
 vertical tab		\v	backspace		\b	double quote		\"
 backslash		\\	question mark		\?	single quote		\'
 carriage return		\r	formfeed		\f</code></pre>
