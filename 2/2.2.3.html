@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>
+      CppPrimer
+    </title>
+    <link rel="icon" href="../favicon.ico">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+      href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/qtcreator-dark.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+    <center>
+    <a href="../index.html"><h3>C++ 기초</h3></a>      
+    <hr width="50%" noshade>
+    </center>
+    
+    <div class="row">
+      <div class="left">
+        <ol>
+          <li><a href="../1/0.html">시작</a></li>
+        <li><mark id="red">기본</mark></li>
+        <li><a href="../3/0.html">문자열, 벡터, 배열</a></li>
+        <li><a href="../4/0.html">표현식</a></li>
+        <li><a href="../5/0.html">문장</a></li>
+        <li><a href="../6/0.html">함수</a></li>
+        <li><a href="../7/0.html">클래스</a></li>
+        <li><a href="../8/0.html">IO 라이브러리</a></li>
+        <li><a href="../9/0.html">순차 컨테이너</a></li>
+        <li><a href="../10/0.html">제네릭 알고리즘</a></li>
+        <li><a href="../11/0.html">연관 컨테이너</a></li>
+        <li><a href="../12/0.html">동적 메모리</a></li>
+        <li><a href="../13/0.html">복사 제어</a></li>
+        <li><a href="../14/0.html">연산자 오버로드 및 변환</a></li>
+        <li><a href="../15/0.html">객체 지향 프로그래밍</a></li>
+        <li><a href="../16/0.html">템플릿과 제네릭 프로그래밍</a></li>
+        <li><a href="../17/0.html">라이브러리 특수 기능</a></li>
+        <li><a href="../18/0.html">대형 프로그램 도구</a></li>
+        <li><a href="../19/0.html">특수 도구 및 기법</a></li>
+      </ol> 
+      <ul>
+        <li>부록 <a href="../A/html">라이브러리</a></li>
+      </ul>
+      </div>
+      
+      <div class="center">
+        <ol>
+          <li><a href="2.1.html">원시 내장형 타입</a></li>
+          <li><mark id="red">변수</mark></li>
+          <li><a href="2.3.html">복합 타입</a></li>
+          <li><a href="2.4.html">const 형식 한정자</a></li>
+          <li><a href="2.5.html">타입 다루기</a></li>
+          <li><a href="2.6.html">우리만의 자료구조 정의</a></li>
+        </ol>
+        <ul>
+          <li><a href="2.a.html">단원 요약</a></li>
+          <li><a href="2.b.html">용어 정리</a></li>
+        </ul>
+      </div>
+      
+      <div class="right">
+        <ol>
+          <li><a href="2.2.1.html">변수 정의</a></li>
+          <li><a href="2.2.2.html">변수 선언과 정의</a></li>
+          <li><mark id="red">식별자</mark></li>
+          <li><a href="2.2.4.html">이름의 범위</a></li>
+        </ol>
+      </div>
+    </div>
+    
+    <hr width="100%" noshade>
+C++에서 <b>식별자(identifier)</b>는 문자, 기수, 밑줄 문자(underscore character)로 구성된다. 언어는 이름 길이에 관해 제한을 두지 않는다. 식별자는 반드시 문자 또는 밑줄 문자로 시작되어야 한다. 식별자는 대문자와 소문자를 인식한다. 즉 대문자와 소문자가 구분된다.
+
+<pre><code>//defines four different int variables
+int somename, someName, SomeName, SOMENAME</code></pre>
+
+언어에는 예약된 언어 집합이 있다. 표 2.3과 2.4를 볼 것. 이들 이름은 식별자로 쓰일 수 없다.
+
+<img src="table2.3" width="70%">
+
+또한 표준은 표준 라이브러리에서 쓰이는 이름 집합을 예약한다. 우리가 우리 자신의 프로그램에 정의한 식별자는 두 연속적인 밑줄 문자를 포함해서는 안 되며, 식별자가 대문자로 곧장 이어지는 밑줄 문자로 시작해서는 안 된다. 더불어 함수 바깥에서 정의된 식별자는 밑줄 문자를 포함해서는 안 된다.
+
+<h3>변수 이름 관행</h3>
+<p>변수를 명명하는 널리 받아들여지는 관행이 있다. 이들 관행을 따르면 프로그램 가독성을 높일 수 있다.</p>
+<ul>
+<li>식별자는 그 의미에 관한 암시를 담아야 한다.</li>
+<li>변수 이름은 주로 소문자다. <mark>Index</mark>나 <mark>INDEX</mark>가 아니라 <mark>index</mark>로.</li>
+<li><mark>Sales_item</mark>처럼 우리가 정의한 클래스는 주로 대문자로 시작한다.</li>
+<li>여러 단어로 이루어진 식별자는 시각적으로 각 단어를 구분해야 한다. <mark>studentloan</mark>이 아니라 이를테면 <mark>student_loan</mark>이나 <mark>studentLoan</mark>으로. </li>
+</ul>
+
+<hr width="100%" noshade>
+<h3>모범 실무</h3>
+명명 관습은 일관성이 있어야 가치를 지닌다.
+<hr width="100%" noshade>
+
+<h3>연습문제 2.2.3</h3>
+<b>연습문제 2.12</b> 타당하지 않은 이름이 있는가?
+<ol>
+<li><pre><code>int double = 3.14;</code></pre></li>
+<li><pre><code>int _;</code></pre></li>
+<li><pre><code>int catch-22;</code></pre></li>
+<li><pre><code>int 1_or_2 = 1;</code></pre></li>
+<li><pre><code>double Double = 3.14;</code></pre></li>
+</ol>
+    <hr width="100%" noshade>
+    <p style="text-align:right;">
+      <a href="http://www.charleshouserjr.com/Cplus2.pdf">C++ Primer 5th Edition</a>
+      (Lippman, Lajoie, Moo)
+      <br>번역 <a href="https://sunbeamktw.github.io/BirCon/">김태원</a></p>
+  </body>
+</html>
