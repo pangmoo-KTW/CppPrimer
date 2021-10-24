@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>
+      CppPrimer
+    </title>
+    <link rel="icon" href="../favicon.ico">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+      href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/qtcreator-dark.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+    <center>
+    <a href="../index.html"><h3>C++ 기초</h3></a>      
+    <hr width="50%" noshade>
+    </center>
+    
+    <div class="row">
+      <div class="left">
+        <ol>
+          <li><a href="../1/0.html">시작</a></li>
+        <li><mark id="red">기본</mark></li>
+        <li><a href="../3/0.html">문자열, 벡터, 배열</a></li>
+        <li><a href="../4/0.html">표현식</a></li>
+        <li><a href="../5/0.html">문장</a></li>
+        <li><a href="../6/0.html">함수</a></li>
+        <li><a href="../7/0.html">클래스</a></li>
+        <li><a href="../8/0.html">IO 라이브러리</a></li>
+        <li><a href="../9/0.html">순차 컨테이너</a></li>
+        <li><a href="../10/0.html">제네릭 알고리즘</a></li>
+        <li><a href="../11/0.html">연관 컨테이너</a></li>
+        <li><a href="../12/0.html">동적 메모리</a></li>
+        <li><a href="../13/0.html">복사 제어</a></li>
+        <li><a href="../14/0.html">연산자 오버로드 및 변환</a></li>
+        <li><a href="../15/0.html">객체 지향 프로그래밍</a></li>
+        <li><a href="../16/0.html">템플릿과 제네릭 프로그래밍</a></li>
+        <li><a href="../17/0.html">라이브러리 특수 기능</a></li>
+        <li><a href="../18/0.html">대형 프로그램 도구</a></li>
+        <li><a href="../19/0.html">특수 도구 및 기법</a></li>
+      </ol> 
+      <ul>
+        <li>부록 <a href="../A/html">라이브러리</a></li>
+      </ul>
+      </div>
+      
+      <div class="center">
+        <ol>
+          <li><a href="2.1.html">원시 내장형 타입</a></li>
+          <li><mark id="red">변수</mark></li>
+          <li><a href="2.3.html">복합 타입</a></li>
+          <li><a href="2.4.html">const 형식 한정자</a></li>
+          <li><a href="2.5.html">타입 다루기</a></li>
+          <li><a href="2.6.html">우리만의 자료구조 정의</a></li>
+        </ol>
+        <ul>
+          <li><a href="2.a.html">단원 요약</a></li>
+          <li><a href="2.b.html">용어 정리</a></li>
+        </ul>
+      </div>
+      
+      <div class="right">
+        <ol>
+          <li><a href="2.2.1.html">변수 정의</a></li>
+          <li><a href="2.2.2.html">변수 선언과 정의</a></li>
+          <li><a href="2.2.3.html">>식별자</a></li>
+          <li><mark id="red">이름의 범위</mark></li>
+        </ol>
+      </div>
+    </div>
+    
+    <hr width="100%" noshade>
+<p>프로그램의 어떤 부분이든 각각의 이름은 변수, 함수, 타입 등 특정 개체를 가리킨다. 하지만 주어진 이름은 프로그램의 다른 부분에 있는 다른 개체를 가리키도록 재사용될 수도 있다.</p>
+
+<p><b>범위(scope)</b>는 한 이름이 특정 의미를 지니는 프로그램의 한 부분이다. C++에서 범위는 대부분 중괄호로 경계 지어진다.</p>
+
+<p>같은 이름은 다른 범위의 다른 개체를 가리킬 수도 있다. 이름은 선언 이후 범위가 끝날 때까지 가시적이다.</p>
+
+<p>가령 <a href="../1/1.4.2.html">§1.4.2</a>의 프로그램을 살펴보자.</p>
+<pre><code>#include &lt;iostream&gt;
+int main()
+{
+	int sum = 0;
+	// sum values from 1 through 10 inclusive
+	for (int val = 1; val <= 10; ++val)
+		sum += val;	// equivalent to sum = sum + val
+	std::cout << “Sum of 1 to 10 inclusive is “
+		<< sum << std::endl;
+	return 0;
+}</code></pre>
+<p>이 프로그램은 세 가지 이름 <mark>main, sum, val</mark>을 정의한다. 그런 다음 이름공간 <mark>std</mark>와 이 이름공간에서 비롯하는 두 가지 이름인 <mark>cout</mark>과 <mark>endl</mark>을 사용한다.</p>
+
+<p><mark>main</mark>이라는 이름은 중괄호 밖에서 정의되었다. <mark>main</mark>이라는 이름은 함수 바깥에서 정의되는 이름 대다수와 마찬가지로 <b>전역 범위(global scope)</b>를 지닌다. 전역 범위의 이름은 한 번 선언되면 프로그램 전체에 걸쳐 접근 가능하다. <mark>sum</mark>이라는 이름은 <mark>main</mark> 함수의 몸체 블록의 범위에서 정의되었다. <mark>sum</mark>은 선언 지점 이후 <mark>main</mark> 함수가 끝날 때까지 접근 가능하다. 하지만 그 밖에서는 불가능하다. 변수 <mark>sum</mark>은 <b>블록 범위(block scope)</b>를 지닌다. 이름 <mark>val</mark>은 <mark>for</mark> 문장의 범위에서 정의되었다. 이는 그 문장 내부에서는 사용될 수 있지만 <mark>main</mark>의 다른 곳에서는 쓰일 수 없다.</p>
+
+<hr width="100%" noshade>
+<h3>조언: 첫 사용시에 변수를 정의할 것</h3>
+객체가 처음 쓰이는 지점 근처에서 객체를 정의하는 것은 보통 좋은 생각이다. 변수의 정의를 찾기 쉽게 되어 가독성을 증진할 수 있다. 더 중요하게는, 처음 쓰이는 곳 근처에서  변수를 정의하면 변수에 유용한 초기 값을 부여하기 쉬울 수 있다. 
+<hr width="100%" noshade>
+
+<h3>중첩 범위</h3>
+<p>범위는 다른 범위를 포함할 수도 있다. 포함된 (또는 중첩된) 범위는 <b>내부 범위(inner scope)</b>라고 불리며 포함하는 범위는 <b>외부 범위(outer scope)</b>라고 불린다.</p>
+
+<p>이름이 한 범위 안에서 선언되었다면, 그 이름은 그 범위 내부에 중첩된 범위에도 쓰일 수 있다. 외부 범위에서 선언된 이름 또한 내부 범위에서 다시 정의될 수 있다.</p>
+
+<pre><code>#include &lt;iostream&gt;
+// Program for illustration purposes only: It is bad style for a function
+// to use a global variable and also define a local variable with the same name
+int reused = 42;	// reused has global scope
+int main()
+{
+	int unique = 0;	unique has block scope
+	// output#1: uses global reused; prints 42 0
+	std::cout << reused << “ “ << unique << std::endl;
+	int reused = 0;	// new, local object named reused hides global reused
+	// output#2: uses local reused; prints 0 0
+	std::cout << reused << “ “ << unique << std::endl;
+	// output#3: explicitly requests the global reused; prints 42 0
+std::cout << ::reused < “ “ << unique << std::endl;
+return 0; 
+}</code></pre>
+
+<p>Output#1은 <mark>reused</mark>의 지역 정의보다 먼저 나타난다. 따라서 이 출력문은 전역 범위에서 정의된 이름 <mark>reused</mark>를 사용한다. 이 문장은 <mark>42 0</mark>을 출력한다. Output#2는 <mark>reused</mark>의 지역 정의 이후에 나타난다. 지역 <mark>reused<mark>는 이제 <b>범위 안에(in scope)</b> 있다. 따라서 이 두 번째 출력문은 전역 <mark>reused<mark>가 아니라 지역 객체 <mark>reused<mark>를 사용한다. Output#3은 범위 연산자(<a href="../1/1.2.html">§1.2</a>)를 사용해 디폴트 범위 규칙을 덮어 쓴다. 전역 범위에는 이름이 없다. 따라서 범위 연산자가 빈 좌변을 갖는다면 이는 우변의 이름을 전역 범위에서 취하라는 요청이다. 따라서 이 표현식은 <mark>reused</mark>를 사용하고 <mark>42 0</mark>을 출력한다.</p>
+
+<hr width="100%" noshade>
+<h3>경고</h3>
+함수가 사용하거나 사용할 수 있는 전역 변수와 같은 이름으로 지역 변수를 정의하는 것은 거의 항상 나쁜 생각이다.
+<hr width="100%" noshade>
+
+<h3>연습문제 2.2.4</h3>
+<b>연습문제 2.13</b> 아래 프로그램에서 <mark>j</mark>의 값은 무엇인가?
+<pre><code>int i = 42;
+int main()
+{
+	int i = 100;
+	int j = i;
+}</code></pre>
+<b>연습문제 2.14</b> 아라 프로그램은 타당한가? 그렇다면 어떤 값이 출력되는가?
+<pre><code>int i = 100, sum = 0;
+for (int i = 0; i != 10; ++i)
+	sum += i;
+std::cout << i << “ “ << sum << std::endl;</code></pre>
+
+    <hr width="100%" noshade>
+    <p style="text-align:right;">
+      <a href="http://www.charleshouserjr.com/Cplus2.pdf">C++ Primer 5th Edition</a>
+      (Lippman, Lajoie, Moo)
+      <br>번역 <a href="https://sunbeamktw.github.io/BirCon/">김태원</a></p>
+  </body>
+</html>
