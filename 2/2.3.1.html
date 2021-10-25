@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>
+      CppPrimer
+    </title>
+    <link rel="icon" href="../favicon.ico">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+      href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/qtcreator-dark.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+    <center>
+    <a href="../index.html"><h3>C++ 기초</h3></a>      
+    <hr width="50%" noshade>
+    </center>
+    
+    <div class="row">
+      <div class="left">
+        <ol>
+          <li><a href="../1/0.html">시작</a></li>
+        <li><mark id="red">기본</mark></li>
+        <li><a href="../3/0.html">문자열, 벡터, 배열</a></li>
+        <li><a href="../4/0.html">표현식</a></li>
+        <li><a href="../5/0.html">문장</a></li>
+        <li><a href="../6/0.html">함수</a></li>
+        <li><a href="../7/0.html">클래스</a></li>
+        <li><a href="../8/0.html">IO 라이브러리</a></li>
+        <li><a href="../9/0.html">순차 컨테이너</a></li>
+        <li><a href="../10/0.html">제네릭 알고리즘</a></li>
+        <li><a href="../11/0.html">연관 컨테이너</a></li>
+        <li><a href="../12/0.html">동적 메모리</a></li>
+        <li><a href="../13/0.html">복사 제어</a></li>
+        <li><a href="../14/0.html">연산자 오버로드 및 변환</a></li>
+        <li><a href="../15/0.html">객체 지향 프로그래밍</a></li>
+        <li><a href="../16/0.html">템플릿과 제네릭 프로그래밍</a></li>
+        <li><a href="../17/0.html">라이브러리 특수 기능</a></li>
+        <li><a href="../18/0.html">대형 프로그램 도구</a></li>
+        <li><a href="../19/0.html">특수 도구 및 기법</a></li>
+      </ol> 
+      <ul>
+        <li>부록 <a href="../A/html">라이브러리</a></li>
+      </ul>
+      </div>
+      
+      <div class="center">
+        <ol>
+          <li><a href="2.1.html">원시 내장형 타입</a></li>
+          <li><a href="2.2.html">변수</a></li>
+          <li><mark id="red">복합 타입</mark></li>
+          <li><a href="2.4.html">const 형식 한정자</a></li>
+          <li><a href="2.5.html">타입 다루기</a></li>
+          <li><a href="2.6.html">우리만의 자료구조 정의</a></li>
+        </ol>
+        <ul>
+          <li><a href="2.a.html">단원 요약</a></li>
+          <li><a href="2.b.html">용어 정리</a></li>
+        </ul>
+      </div>
+      
+      <div class="right">
+        <ol>
+          <li><mark id="red">레퍼런스</mark></li>
+          <li><a href="2.3.2.html">포인터</a></li>
+          <li><a href="2.3.3.html">복합 타입 선언 이해</a></li>
+        </ol>
+      </div>
+    </div>
+    
+    <hr width="100%" noshade>
+    
+    <hr width="100%" noshade>
+<h3>메모</h3>
+새로운 표준은 새로운 레퍼런스를 소개한다. 바로 “r값 레퍼런스”로, <a href="../13/13.6.1.html">§13.6.1</a>에서 다룰 것이다. 이들 레퍼런스는 원래 내부 클래스를 위한 것이다. 엄밀히 말하면, 우리가 <b>레퍼런스</b>를 언급할 때 뜻하는 것은 “l값 레퍼런스”다.
+<hr width="100%" noshade>
+
+<b>레퍼런스(reference)</b>는 객체에 대안적인 이름을 정의한다. 레퍼런스 타입은 다른 타입을 “지시한다”(refers to). <mark>d</mark>가 선언되는 이름일 때 레퍼런스 타입은 <mark>&d</mark>와 같은 형식으로 정의된다.
+
+<pre><code>int ival = 1024;
+int &refVal = ival;	// refVal refers to (is another name for) ival
+int &refVal2;		// error: a reference must be initialized</code></pre>
+
+일반적으로 변수를 초기화할 때면 초기화자의 값은 객체 생성 시에 객체로 복사된다. 레퍼런스를 정의할 때, 초기화자의 값을 복사하기보다는 초기화자에 레퍼런스를 <b>구속한다(bind)</b>. 한 번 초기화되면 레퍼런스는 원래 객체에 구속되어 유지된다. 레퍼런스가 다른 객체를 지시하도록 다시 구속할 수 있는 방법은 없다. 레퍼런스를 재구속할 수 있는 방법이 없기 때문이다. 레퍼런스는 <b>반드시</b> 초기화되어야 한다.
+
+<h3>레퍼런스는 이명(異名, alias)이다</h3>
+<hr width="100%" noshade>
+<h3>메모</h3>
+레퍼런스는 객체가 아니다. 대신 레퍼런스는 그저 이미 존재하는 객체의 또 다른 이름이다.
+<hr width="100%" noshade>
+
+레퍼런스 정의 이후에는 그 레퍼러스에 대한 <b>모든</b> 연산은 실상 레퍼런스가 구속된 객체에 대한 연산이다. 
+
+<pre><code>refVal = 2;	// assigns 2 to the object to which refVal refers, i.e., to ival
+int ii = refVal;		// same as ii = ival;</code></pre>
+
+레퍼런스에 대입할 때는 레퍼런스가 구속된 객체에 대입하는 것이다. 레퍼런스의 값을 취할 때는 실상 레퍼런스가 구속된 객체의 값을 취하는 것이다. 이와 유사하게 레퍼런스를 초기화자로 사용할 때면 사실상 레퍼런스가 구속된 객체를 사용하는 것이다.
+
+<pre><code>// ok: refVal3 is bound to the object to which refVal is bound, i.e., to ival
+int &refVal3 = refVal;
+// initializes i from the value in the object to which refVal is bound
+int i = refVal;	// ok: initializes i to the same value as ival</code></pre>
+
+레퍼런스가 객체가 아니기에 레퍼런스에 대한 레퍼런스를 정의할 수는 없다.
+
+<h3>레퍼런스 정의</h3>
+우리는 하나의 정의에 여러 레퍼런스를 정의할 수 있다. 레퍼러스인 각 식별자에는 반드시 <mark>&</mark> 기호가 선행되어야 한다. 
+
+<pre><code>int i = 1024, i2 = 2048;	// i and i2 are both ints
+int &r = i, r2 = i2;	// r is a reference bound to i; r2 is an int
+int i3= 1024, &ri = i3;	// i3 is an int; ri is a reference bound to i3
+int &r3 = i3, &r4 = i2;	// both r3 and r4 are references</code></pre>
+
+<a href="2.4.1.html">§2.4.1</a>와 <a href="../15/15.2.3.html">§15.2.3</a>에서 다룰 두 가지 예외를 제외하면 레퍼런스의 타입과 레퍼런스가 지시하는 객체의 타입은 반드시 정확히 일치해야 한다. 또 <a href="2.4.1.html">§2.4.1</a>에서 탐구할 이요로 인해 레퍼런스는 객체에만 구속되어야 한다. 리터럴이나 더 일반적인 표현식의 결과에 구속되어서는 안 된다.
+
+<pre><code>int &refVal4 = 10;	// error: initializer must be an object
+double dval = 3.14;
+int &refVal5 = dval;	//error: initializer must be an int object</code></pre>
+
+<hr width="100%" noshade>
+<h3>연습문제 2.3.1</h3>
+<b>연습문제 2.15</b> 아래 정의 가운데 타당하지 않은 것은 무엇인가? 왜 그런가?
+<ol>
+<li><pre><code>int ival = 1.01;</code></pre></li>
+<li><pre><code>int &rval1 = 1.01;</code></pre></li>
+<li><pre><code>int &rval2 = ival;</code></pre></li>
+<li><pre><code>int &rval3;</code></pre></li>
+</ol>
+<b>연습문제 2.16</b> 아래 대입문 가운데 타당하지 않은 것이 있는가? 타당하다면 무엇을 수행하는가?
+<pre><code>int i = 0, &r1 = i; double d = 0, &r2 = d;</code></pre>
+<ol>
+<li><pre><code>r2 = 3.14159;</code></pre></li>
+<li><pre><code>r2 = r1;</code></pre></li>
+<li><pre><code>i = r2;</code></pre></li>
+<li><pre><code>r1 = d;</code></pre></li>
+</ol>
+<b>연습문제 2.17</b> 아래 코드는 무엇을 출력하는가?
+<pre><code>int i, &ri = i;
+i = 5; ri = 10;
+std::cout << i << “ “ << ri << std::endl;</code></pre>
+  
+    <hr width="100%" noshade>
+    <p style="text-align:right;">
+      <a href="http://www.charleshouserjr.com/Cplus2.pdf">C++ Primer 5th Edition</a>
+      (Lippman, Lajoie, Moo)
+      <br>번역 <a href="https://sunbeamktw.github.io/BirCon/">김태원</a></p>
+  </body>
+</html>
