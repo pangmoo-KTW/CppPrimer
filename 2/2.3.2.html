@@ -1,0 +1,263 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>
+      CppPrimer
+    </title>
+    <link rel="icon" href="../favicon.ico">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+      href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/qtcreator-dark.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+    <center>
+    <a href="../index.html"><h3>C++ 기초</h3></a>      
+    <hr width="50%" noshade>
+    </center>
+    
+    <div class="row">
+      <div class="left">
+        <ol>
+          <li><a href="../1/0.html">시작</a></li>
+        <li><mark id="red">기본</mark></li>
+        <li><a href="../3/0.html">문자열, 벡터, 배열</a></li>
+        <li><a href="../4/0.html">표현식</a></li>
+        <li><a href="../5/0.html">문장</a></li>
+        <li><a href="../6/0.html">함수</a></li>
+        <li><a href="../7/0.html">클래스</a></li>
+        <li><a href="../8/0.html">IO 라이브러리</a></li>
+        <li><a href="../9/0.html">순차 컨테이너</a></li>
+        <li><a href="../10/0.html">제네릭 알고리즘</a></li>
+        <li><a href="../11/0.html">연관 컨테이너</a></li>
+        <li><a href="../12/0.html">동적 메모리</a></li>
+        <li><a href="../13/0.html">복사 제어</a></li>
+        <li><a href="../14/0.html">연산자 오버로드 및 변환</a></li>
+        <li><a href="../15/0.html">객체 지향 프로그래밍</a></li>
+        <li><a href="../16/0.html">템플릿과 제네릭 프로그래밍</a></li>
+        <li><a href="../17/0.html">라이브러리 특수 기능</a></li>
+        <li><a href="../18/0.html">대형 프로그램 도구</a></li>
+        <li><a href="../19/0.html">특수 도구 및 기법</a></li>
+      </ol> 
+      <ul>
+        <li>부록 <a href="../A/html">라이브러리</a></li>
+      </ul>
+      </div>
+      
+      <div class="center">
+        <ol>
+          <li><a href="2.1.html">원시 내장형 타입</a></li>
+          <li><a href="2.2.html">변수</a></li>
+          <li><mark id="red">복합 타입</mark></li>
+          <li><a href="2.4.html">const 형식 한정자</a></li>
+          <li><a href="2.5.html">타입 다루기</a></li>
+          <li><a href="2.6.html">우리만의 자료구조 정의</a></li>
+        </ol>
+        <ul>
+          <li><a href="2.a.html">단원 요약</a></li>
+          <li><a href="2.b.html">용어 정리</a></li>
+        </ul>
+      </div>
+      
+      <div class="right">
+        <ol>
+          <li><a href="2.3.1.html">레퍼런스</a></li>
+          <li><mark id="red">포인터</mark></li>
+          <li><a href="2.3.3.html">복합 타입 선언 이해</a></li>
+        </ol>
+      </div>
+    </div>
+    
+    <hr width="100%" noshade>
+    <b>포인터(pointer)</b>는 다른 타입을 “가리키는” 복합 타입이다. 레퍼런스와 마찬가지로 포인터는 다른 객체에 간접적으로 접근하기 위해 쓰인다. 레퍼런스와 다르게 포인터는 그 자체로 하나의 객체다. 포인터는 대입될 수도 있고 복사될 수도 있다. 단일 포인터는 수명 동안 여러 다른 객체를 가리킬 수 있다. 레퍼런스와 다르게 포인터는 정의될 때 초기화되지 않아도 된다. 다른 내장형 타입과 마찬가지로 블록 범위에 정의된 포인터는 초기화되지 않으면 정의되지 않은 값을 갖는다.
+
+<hr width="100%" noshade>
+<h3>경고</h3>
+포인터는 종종 이해하기 어렵다. 포인터 오류로 인한 디버깅은 숙련된 프로그래머에게도 몹시 괴로운 문제다.
+<hr width="100%" noshade>
+
+<mark>d</mark>가 정의되는 이름일 때 포인터 타입은 <mark>*d</mark> 형식의 선언자로 정의된다. <mark>*</mark>는 각 포인터 변수마다 반복되어야 한다.
+
+<pre><code>int *ip1, *ip2;	// both ip1 and ip2 are pointers to int
+double dp, *dp2;	// dp2 is a pointer to double; dp is a double</code></pre>
+
+<h3>객체의 주소를 취하기</h3>
+
+포인터는 다른 객체의 주소를 취한다. 우리는 주소(<b>&</b>) 연산자로 객체의 주소를 확보한다.
+
+<pre><code>int ival = 42;
+int *p = &ival	// p holds the address of ival; p is a pointer to ival</code></pre>
+
+<p>두 번째 문장은 <mark>p</mark>를 <mark>int</mark>에 대한 포인터로 정의하고 <mark>p</mark>가 <mark>ival</mark>이라는 이름의 <mark>int</mark> 객체를 가리키도록 초기화한다. 하지만 레퍼런스가 객체가 아니기 때문에 이들은 객체를 갖지 않는다. 따라서 레퍼런스에 대한 포인터는 정의하지 않는다.</p>
+
+<p><a href="2.4.2.html">§2.4.2</a>와 <a href="../15/15.2.3.html">§15.2.3</a>에서 다룰 두 가지 예외를 제외하면 포인터의 타입과 그 포인터가 가리키는 객체의 타입은 일치해야 한다.</p>
+
+<pre><code>double dval;
+double *pd = &dval;	// ok: initializer is the address of a double
+double *pd2 = pd;	// ok: initializer is a pointer to double
+int *pi = pd;		// error: types of pi and pd differ
+pi = &dval;		// error: assigning the address of a double to a pointer to int</code></pre>
+
+타입이 일치해야 하는 이유는 포인터의 타입이 포인터가 가리키는 객체의 타입을 추론하는 데 쓰이기 때문이다. 포인터가 다른 타입의 객체를 가리킨다면 그 객체에서 수행되는 연산은 실패할 것이다.
+
+<h3>포인터 값</h3>
+포인터에 저장된 값은 (즉 주소는) 아래 네 가지 상태 가운데 하나에 놓인다.
+<ol>
+<li>한 객체를 가리킬 수 있다.</li>
+<li>한 객체 직전의 장소를 가리킬 수 있다.</li>
+<li>널 포인터일 수 있으며, 이는 어떤 객체에도 구속되지 않는다는 뜻이다.</li>
+<li>타당하지 않을 수 있다. 위 세 가지 경우가 아닌 값은 부당하다.</li>
+</ol>
+
+<p>부당한 포인터의 값에 접근하려고 하거나 복사하는 것은 오류다. 초기화되지 않은 변수를 사용할 때와 마찬가지로 이 오류는 컴파일러가 포착하기 어려운 것이다. 부당한 포인터에 접근하는 결과는 정의되지 않았다. 따라서 우리는 항상 주어진 포인터가 타당한지 알아야 한다.</p>
+
+<p>사례 2와 사례 3의 포인터가 타당하더라도 이와 같은 포인터에 대해 할 수 있는 일은 정해져 있다. 이들 포인터가 아무 객체도 가리키지 않기에, 우리는 이들이 포인터가 가리키는 것으로 가정된 객체로 접근하는 데 사용해서는 안 된다. 이와 같은 포인터로 하나의 객체를 접근하고자 할 때의 행동은 정의되지 않았다.</p>
+
+<h3>객체에 접근하기 위해 포인터 사용하기</h3>
+<p>포인터가 한 객체를 가리킬 때 우리는 역참조(<mark>*</mark>) 연산자를 사용하여 그 객체에 접근할 수 있다.</p>
+
+<pre><code>int inval = 42;
+int *p = &ival;	// p holds the address of ival;	p is a pointer to ival
+cout << *p;	// * yields the object to which p points; prints 42</code></pre>
+
+포인터를 역참조하면 포인터가 가리키는 객체를 취할 수 있다. 우리는 역참조의 결과에 대입하여 그 객체에 대입할 수 있다.
+
+<pre><code>*p = 0;	// * yields the object; we assign a new value to ival through p
+cout << *p;	// prints 0 </code></pre>
+
+<mark>*p</mark>에 대입할 때, 우리는 <mark>p</mark>가 가리키는 객체에 대입하는 것이다.
+
+<hr width="100%" noshade>
+<h3>메모</h3>
+우리는 오직 한 객체를 가리키는 타당한 포인터만 역참조할 수 있다.
+<hr width="100%" noshade>
+
+<hr width="100%" noshade>
+<h3>핵심 개념: 어떤 기호는 여러 의미를 가진다.</h3>
+<mark>&</mark>와 <mark>*</mark> 같은 기호는 표현식에서 연산자로도 쓰이고 선언의 일부로 쓰이기도 한다. 기호가 쓰이는 맥락은 기호의 의미를 결정한다.
+<pre><code>int i = 42;
+int &r = i;	// & follows a type and is part of a declaration; r is a reference
+int *p;		// * follows a type and is part of a declaration; p is a pointer
+p = &i;		// & is used in an expression as the address-of operator
+*p = i;		// * is used in an expression as the dereference operator
+int &r2 = *p	// & is part of the declaration;	* is the dereference operator</code></pre>
+
+선언에서는 <mark>&</mark>와 <mark>*</mark>는 복합 타입을 형성하기 위해 쓰인다. 표현식에서는 같은 기호가 연산자를 표기하기 위해 쓰인다. 같은 기호가 아주 다른 의미로 사용되기에, 드러나는 것을 무시하고 둘을 다른 기호로 생각해보는 것이 유용하다.
+<hr width="100%" noshade>
+
+<h3>널 포인터</h3>
+<b>널 포인터(null pointer)</b>는 아무 객체도 가리키지 않는다. 코드는 사용 이전에 포인터가 널 포인터인지 확인할 수 있다. 널 포인터를 확보하는 여러 방법이 있다.
+
+<pre><code>int *p1 = nullptr;		// equivalent to int *p1 = 0;
+int *p2 = 0;		// directly initializes p2 from the literal constant 0
+// mus #include cstdlib
+int *p3 = NULL;	// equivalent to int *p3 = 0;</code></pre>
+
+포인터를 초기화하기 위한 가장 직접적인 방법은 <b>nullptr</b> 리터럴을 사용하는 것이다. 이는 새 표준으로 소개된 것이다. <mark>nullptr</mark>는 특수한 타입을 가지는 리터럴로, 다른 포인터 타입으로 변환될 (<a href="2.1.2.html">§2.1.2</a>) 수 있다. 대안적으로 우리는 <mark>p2</mark> 정의에서 그랬던 것처럼 리터럴 <mark>0</mark>에 포인터를 초기화할 수 있다.
+
+<p>오래된 프로그램은 종종 <mark>NULL</mark>이라는 이름의 <b>전처리기 변수(preprocessor variable)</b>를 사용하는데, 이는 <mark>cstdlib</mark> 헤더가 <mark>0</mark>으로 정의하는 것이다.</p>
+
+<p><a href="2.6.3.html">§2.6.3</a>에서 전처리기에 관해 더 설명할 것이다. 지금으로서 유용한 것은 전처리기가 컴파일러 이전에 실행되는 프로그램이라는 것이다. 전처리기 변수는 전처리기에 의해 관리되며, <mark>std</mark> 이름공간의 일부가 아니다. 결과적으로 우리는 <mark>std::</mark> 접두사 없이 직접적으로 이들을 지시한다.</mark></p>
+
+<p>전처리기 변수를 사용할 때, 전처리기는 자동적으로 그 변수를 그 값으로 대체한다. 따라서 포인터를 <mark>NULL</mark>로 초기화하는 것은 <mark>0</mark>으로 초기화하는 것과 동치다. 현대적 C++ 프로그램은 일반적으로 <mark>NULL</mark> 사용을 피해야 하며 대신 <mark>nullptr</mark>를 사용해야 한다.</p>
+
+<p><mark>int</mark> 변수를 포인터에 대입하는 것은 타당하지 않다. 변수의 값이 <mark>0</mark>이더라도 말이다.</p>
+
+<pre><code>int zero = 0;
+pi = zero;	// error: cannont assign an int to a pointer</code></pre>
+
+<hr width="100%" noshade>
+<h3>조언: 모든 포인터를 초기화할 것</h3>
+<p>초기화되지 않은 포인터는 실행시간 오류의 일반적인 원인이다.</p>
+<p>여타 초기화되지 않은 변수와 마찬가지로 초기화되지 않은 포인터를 사용했을 때 일어나는 일은 정의되지 않았다. 초기화되지 않은 포인터를 사용하는 일은 거의 항상 실행시간 충돌을 일으킨다. 하지만 이런 충돌을 디버깅하는 일은 놀라울 정도로 힘들다.</p>
+<p>대다수 컴파일러에서 초기화되지 않은 포인터를 사용할 때면 포인터가 가리키는 메모리상의 비트는 주로소 쓰인다. 초기화되지 않은 포인터 사용은 가정된 장소의 가정된 객체에 대한 접근을 요청하는 것이다. 포인터가 배정된 메모리상에서의 비트로 형성된 타당하지 않은 주소에서 타당한 주소를 뗴어놓는 방법은 없다.</p>
+<p>우리가 거듭 강조하는 모든 변수를 초기화하라는 말은 포인터의 경우 특히 새겨들어야 한다. 가능하다면 가리켜야 하는 객체가 정의된 이후에만 포인터를 정의하라. 포인터를 구속할 객체가 없다면 포인터를 <mark>nullptr</mark>나 0으로 초기화하라. 이 경우, 프로그램은 포인터가 객체를 가리키지 않는다고 확인할 수 있다.</p>
+<hr width="100%" noshade>
+
+<h3>대입과 포인터</h3>
+<p>포인터와 객체 모두 다른 객체에 간접적인 접근을 부여한다. 하지만 그 방식에 있어 결정적인 차이가 있다. 가장 중요한 차이는 바로 레퍼런스가 객체가 아니라는 것이다. 레퍼런스를 정의하면, 레퍼런스가 다른 객체를 지시하도록 만들 방법이 없다. 레퍼런스를 사용할 때면 레퍼런스가 초기에 구속된 객체만 취할 수 있다.</p>
+
+<p>포인터와 포인터가 취하는 주소 간에는 그런 성질이 없다. 여타 (레퍼런스가 아닌) 변수와 마찬가지로 포인터에 대입할 때면 포인터 자체에 새 값을 부여하는 것이다. 대입은 포인터가 다른 객체를 가리키도록 만든다.</p>
+
+<pre><code>int i = 42;
+int *pi = 0;	// pi is initialized but addresses no object
+int *pi2 = &i;	// pi2 initialized to hold the address of i
+int *pi3;	// if pi3 is defined inside a block, pi3 is uninitialized
+pi3 = pi2;	// pi3 and pi2 address the same object, e.g., i
+pi2 = 0;	// pi2 now addresses no object</code></pre>
+
+대입문이 포인터를 바꾸는 건지 포인터가 가리키는 객체를 바꾸는 건지 제대로 따라가기 어려울 수 있다. 중요한 점은 바로 대입문이 자신의 좌측 피연산자를 바꾼다는 사실을 기억하는 것이다. 다음처럼 작성할 때면
+
+<pre><code>pi = &ival;	// value in pi is changed; pi now points to ival</code></pre>
+
+새 값이 <mark>pi</mark>에 대입되는 것으로, <mark>pi</mark>가 취하는 주소를 바꾸는 것이다. 다른 한편 다음처럼 작성할 때면
+
+<pre><code>*pi = 0;		// value in ival is changed; pi is unchanged
+
+<mark>*pi</mark>가 (즉 <mark>pi</mark>가 가리키는 값이) 변하는 것이다.
+
+<h3>다른 포인터 연산</h3>
+
+포인터가 타당한 값을 갖는 이상, 포인터를 조건으로 사용할 수 있다. 산술 값을 조건으로 사용할 (<a href="2.1.2.html">§2.1.2</a>) 때와 마찬가지로 포인터가 0이라면 조건은 <mark>false</mark>다. 
+
+<pre><code>int ival = 1024;
+int *pi = 0;		// pi is a valid, null pointer
+int *pi2 = &ival;	// pi is a valid pointer that holds the address of ival
+if (pi)	// pi has value 0, so condition evaluates as false
+	// …
+if (pi2)	// pi points to ival, so it is not 0; the condition evaluates as true
+	// … </code></pre>
+
+<p>0이 아닌 포인터는 <mark>true</mark>로 평가된다.</h3>
+
+<p>같은 타입의 두 타당한 포인터가 주어졌다면 우리는 이들의 상등성(<mark>==</mark>)이나 비상등성(<mark>!=</mark>)을 비교할 수 있다. 이들 연산자의 결과는 <mark>bool</mark> 타입을 갖는다. 두 포인터는 이들이 같은 주소를 취하면 상등이고 아니라면 비상등이다. 두 포인터 모두 널이라면 이들은 같은 주소를 취한다(즉 상등이다). 또 두 포인터가 같은 객체 직전이라도 같은 주소를 취한다. 포인터에 대한 객체와 다른 객체의 직전에 대한 포인터가 같은 주소를 갖는 것이 가능하다는 사실을 환기하라. 이와 같은 포인터는 상등으로 평가될 것이다.</p>
+
+<p>이들 연산자가 포인터의 값을 사용하기에, 조건 또는 비교 내부의 포인터는 타당한 포인터여야 한다. 부당한 포인터를 조건 또는 비교에 사용할 적의 행동은 정의되지 않았다.</p>
+
+<a href="../3/3.5.3.html">§3.5.3</a>에서 추가적으로 포인터 연산을 다룰 것이다.
+
+<h3><mark>void*</mark> 포인터</h3>
+<p><b>void*</b> 타입은 특수한 포인터로 아무 객체의 주소를 취할 수 있다. 여느 포인터와 마찬가지로 <mark>void&</mark> 포인터는 주소를 취한다. 하지만 그 주소의 객체의 타입은 알려지지 않는다.</p>
+
+<pre><code>double obj = 3.14, *pd = &obj;
+// ok: void* can hold the address value of any data pointer type
+void *pv = &obj	// obj can be an object of any type
+pv = pd;		// pv can hold a pointer to any type</code></pre>
+
+<p><mark>void*</mark> 포인터로 할 수 있는 일은 한정되어 있다. 다른 포인터와 비교하는 데 사용할 수 있으며, 함수에 전달하거나 함수에서 반환받을 수 있으며, 다른 <mark>void*</mark> 포인터에 대입할 수 있다. 하지만 <mark>void*</mark>포인터가 가리키는 객체에 대해 연산을 수행할 수는 없다. 그 객체의 타입을 모르고, 객체에서 수행할 수 있는 연산을 결정하는 것이 바로 타입이기 때문이다.</p>
+
+<p>일반적으로는 메모리를 메모리로 다루기 위해 <mark>void*</mark> 포인터를 사용한다. 그 메모리에 저장된 객체에 접근하기 위해 사용하지는 않는다. 이와 같은 방법을 <a href="../19/19.1.1.html">§19.1.1</a>에서 배울 것이다. <a href="../4/4.11.3.html">§19.1.1</a>에서는 <mark>void*</mark> 포인터에 저장된 주소를 되찾는 법을 볼 것이다.</p>
+
+<hr width="100%" noshade>
+<h3>연습문제 2.3.2</h3>
+<p><b>연습문제 2.18</b> 포인터의 값을 바꾸는 코드를 작성할 것. 포인터가 가리키는 값을 바꾸는 코드를 작성할 것.</p>
+<p><b>연습문제 2.19</b> 포인터와 레퍼런스 간의 결정적인 차이를 설명할 것.</p>
+<p><b>연습문제 2.20</b> 아래 프로그램은 무엇을 하는가?
+<pre><code>int i = 42;
+int *p1 = &i;
+*p1 = *p1 * *p1;</code></pre></p>
+<p><b>연습문제 2.21</b> 아래 정의를 각각 설명할 것. 무엇이 타당한지 지적하고 그 이유 또한 언급할 것.
+<pre><code>int i = 0;</code></pre>
+<ol>
+<li><pre><code>double* dp = &i;</code></pre></li>
+<li><pre><code>int *ip = i;</code></pre></li>
+<li><pre><code>int *p = &i;</code></pre></li>
+</ol></p>
+<p><b>연습문제 2.22</b> <mark>p</mark>가 <mark>int</mark>에 대한 포인터라고 가정하여 아래 코드를 설명할 것.
+<pre><code>if (p) // …
+if (*p) // …</code></pre></p>
+<p><b>연습문제 2.23</b> 주어진 포인터 <mark>p</mark>에 대해 <mark>p</mark>가 타당한 객체를 가리키는지 결정할 수 있는가? 그렇다면 어떻게 가능한가? 그렇지 않다면 왜 그런가?</p>
+<p><b>연습문제 2.24</b> 왜 <mark>p</mark>의 초기화는 타당한데 <mark>lp</mark>는 부당한가?
+<pre><code>int i = 42;	void *p = &i;		long *lp = &i;</code></pre></p>
+
+    <hr width="100%" noshade>
+    <p style="text-align:right;">
+      <a href="http://www.charleshouserjr.com/Cplus2.pdf">C++ Primer 5th Edition</a>
+      (Lippman, Lajoie, Moo)
+      <br>번역 <a href="https://sunbeamktw.github.io/BirCon/">김태원</a></p>
+  </body>
+</html>
