@@ -130,7 +130,7 @@ int **ppi = &pi;	// ppi points to a pointer to an int</code></pre>
 이 프로그램은 <mark>ival</mark>의 값을 세 가지 다른 방식으로 출력한다. 우선 직접적으로 출력한 다음 <mark>pi</mark> 안의 <mark>int</mark>에 대한 포인터로 출력한 다음 <mark>ival</mark> 기저의 값을 취하기 위해 <mark>ppi</mark>를 두 번 역참조하여 출력한다.
 
 <h3>포인터에 대한 레퍼런스</h3>
-레퍼런스는 객체가 아니다 .따라서 레퍼런스에 대한 포인터를 가질 수는 없다. 하지만 포인터는 객체이기에 포인터에 대한 레퍼런스를 정의할 수는 있다.
+레퍼런스는 객체가 아니다. 따라서 레퍼런스에 대한 포인터를 가질 수는 없다. 하지만 포인터는 객체이기에 포인터에 대한 레퍼런스를 정의할 수는 있다.
 <pre><code>int i = 42;
 int *p;		// p is a pointer to int
 int *&r = p;	// r is a reference to the pointer p
