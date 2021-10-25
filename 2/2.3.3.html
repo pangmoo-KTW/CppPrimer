@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>
+      CppPrimer
+    </title>
+    <link rel="icon" href="../favicon.ico">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+      href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/qtcreator-dark.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+    <center>
+    <a href="../index.html"><h3>C++ 기초</h3></a>      
+    <hr width="50%" noshade>
+    </center>
+    
+    <div class="row">
+      <div class="left">
+        <ol>
+          <li><a href="../1/0.html">시작</a></li>
+        <li><mark id="red">기본</mark></li>
+        <li><a href="../3/0.html">문자열, 벡터, 배열</a></li>
+        <li><a href="../4/0.html">표현식</a></li>
+        <li><a href="../5/0.html">문장</a></li>
+        <li><a href="../6/0.html">함수</a></li>
+        <li><a href="../7/0.html">클래스</a></li>
+        <li><a href="../8/0.html">IO 라이브러리</a></li>
+        <li><a href="../9/0.html">순차 컨테이너</a></li>
+        <li><a href="../10/0.html">제네릭 알고리즘</a></li>
+        <li><a href="../11/0.html">연관 컨테이너</a></li>
+        <li><a href="../12/0.html">동적 메모리</a></li>
+        <li><a href="../13/0.html">복사 제어</a></li>
+        <li><a href="../14/0.html">연산자 오버로드 및 변환</a></li>
+        <li><a href="../15/0.html">객체 지향 프로그래밍</a></li>
+        <li><a href="../16/0.html">템플릿과 제네릭 프로그래밍</a></li>
+        <li><a href="../17/0.html">라이브러리 특수 기능</a></li>
+        <li><a href="../18/0.html">대형 프로그램 도구</a></li>
+        <li><a href="../19/0.html">특수 도구 및 기법</a></li>
+      </ol> 
+      <ul>
+        <li>부록 <a href="../A/html">라이브러리</a></li>
+      </ul>
+      </div>
+      
+      <div class="center">
+        <ol>
+          <li><a href="2.1.html">원시 내장형 타입</a></li>
+          <li><a href="2.2.html">변수</a></li>
+          <li><mark id="red">복합 타입</mark></li>
+          <li><a href="2.4.html">const 형식 한정자</a></li>
+          <li><a href="2.5.html">타입 다루기</a></li>
+          <li><a href="2.6.html">우리만의 자료구조 정의</a></li>
+        </ol>
+        <ul>
+          <li><a href="2.a.html">단원 요약</a></li>
+          <li><a href="2.b.html">용어 정리</a></li>
+        </ul>
+      </div>
+      
+      <div class="right">
+        <ol>
+          <li><a href="2.3.1.html">레퍼런스</a></li>
+          <li><a href="2.3.2.html">포인터</a></li>
+          <li><mark id="red">복합 타입 선언 이해</mark></li>
+        </ol>
+      </div>
+    </div>
+    
+    <hr width="100%" noshade>
+우리가 본 것처럼 변수 선언은 기초 타입과 선언자 목록을 요구한다. 각 선언자는 제 변수를 같은 정의의 다른 선언자와 다르게 기초 타입과 연관지을 수 있다. 따라서 하나의 정의는 다른 서로 타입의 변수를 정의할 수 있다.
+
+<pre><code>//i is an int; p is a pointer to int; r is a reference to int
+int i = 1024, *p = &i, &r = i;</code></pre>
+
+<hr width="100%" noshade>
+<h3>경고</h3>
+많은 프로그래머는 기초 타입과 선언자의 일부일 수 있는 타입 제어자 간의 인터랙션에 혼란을 느낀다.
+<hr width="100%" noshade>
+
+<h3>여러 변수 정의하기</h3>
+타입 제어자가 (<mark>*</mark> 또는 <mark>&</mark>가) 하나의 문장에 정의되는 모든 변수에 적용된다는 것은 일반적인 오해다. 문제는 우리가 타입 제어자와 선언되는 이름 사이에 화이트스페이스를 위치 지을 수 있다는 점에 근거한다.
+
+<pre><code>int* p;	// legal but might be misleading</code></pre>
+우리는 이 정의가 오도적이라고 평가하는데 왜냐하면 <mark>int*</mark>가 이 문장에 선언되는 각 변수의 타입이라고 제안하기 때문이다. 보이는 것과 다르게 이 선언의 기초 타입은 <mark>int</mark>지 <mark>int*</mark>가 아니다. <mark>*</mark>는 <mark>p</mark>의 타입을 제어한다. 같은 문장에 선언된 다른 객체에 관해서는 아무것도 말하지 않는다.
+
+<pre><code>int *p1, *p2	// both p1 and p2 are pointers to int</mark>
+<p>이 스타일은 변수가 암시된 복합 타입을 지닌다는 것을 강조한다.</p>
+
+<p>두 번째 코드는 타입 제어자를 타입과 함께 위치시키지만 한 문장당 오직 하나의 변수를 정의한다.</p>
+
+<pre><code>int* p1;	// p1 is a pointer to int
+int*p2;	// p2 is a pointer to int</code></pre>
+
+이 스타일은 선언이 복합 타입을 정의한다는 것을 강조한다.
+
+<hr width="100%" noshade>
+<h3>팁</h3>
+포인터나 레퍼런스를 정의하는 하나의 옳은 방법은 없다. 중요한 것은 스타일을 고른 다음 일관성을 지키는 것이다.
+<hr width="100%" noshade>
+
+이 책에서 우리는 첫 번째 스타일을 사용하고 변수 이름과 함께 <mark>*</mark>(또는 <mark>&</mark>)를 위치 시킨다. 
+
+<h3>포인터에 대한 포인터</h3>
+<p>일반적으로 하나의 선언자에 적용될 수 있는 타입 제어자의 수에는 한계가 없다. 하나 이상의 제어자가 있을 경우 이들은 논리적인 방식으로 결합되지만 명백한 방식으로 결합되지는 않는다. 가령 포인터 하나를 생각해보라. 포인터는 메모리상의 객체로, 여타 객체처럼 주소를 지닌다. 따라서 포인터의 주소를 또 다른 포인터에 저장할 수도 있다.</p>
+
+<p>우리는 각 포인터 계층을 <mark>*</mark>로 암시한다. 즉 포인터에 대한 포인터에는 <mark>**</mark>라고 적고 포인터에 대한 포인터에 대한 포인터에는 <mark>***</mark>라고 적는 것이다.</p>
+
+<pre><code>int ival = 1024;
+int *pi = &ival;	// pi points to an int
+int **ppi = &pi;	// ppi points to a pointer to an int</code></pre>
+
+여기서 <mark>pi</mark>는 <mark>int</mark>에 대한 포인터고 <mark>ppi</makr>는 <mark>int</mark>에 대한 포인터에 대한 포인터다. 우리는 이들 객체를 다음처럼 표현할 수 있다.
+
+<center><img src="ppi.png" width="70%"></center>
+
+역참조와 마찬가지로 <mark>int</mark>에 대한 포인터는 <mark>int</mark>를 취하며, 포인터에 대한 포인터를 역참조하면 포인터를 취할 수 있다. 기저의 객체에 접근하려면 원래 포인터를 두 번 역참조해야 한다.
+
+<pre><code>cout << “The value of ival\n”
+	<< “direct value: “ << ival << “\n”
+	<< “indirect value: “ << *pi << “\n”
+	<< “doubly indirect value: “ << **ppi
+	<< endl;</code></pre>
+
+이 프로그램은 <mark>ival</mark>의 값을 세 가지 다른 방식으로 출력한다. 우선 직접적으로 출력한 다음 <mark>pi</mark> 안의 <mark>int</mark>에 대한 포인터로 출력한 다음 <mark>ival</mark> 기저의 값을 취하기 위해 <mark>ppi</mark>를 두 번 역참조하여 출력한다.
+
+<h3>포인터에 대한 레퍼런스</h3>
+레퍼런스는 객체가 아니다 .따라서 레퍼런스에 대한 포인터를 가질 수는 없다. 하지만 포인터는 객체이기에 포인터에 대한 레퍼런스를 정의할 수는 있다.
+<pre><code>int i = 42;
+int *p;		// p is a pointer to int
+int *&r = p;	// r is a reference to the pointer p
+r = &i;		// r refers to a pointer; assigning &i to r makes p point to i
+*r = 0;		// dereferencing r yields i, the object to which p points; changes i</code></pre>
+<mark>r</mark>의 타입을 이해하는 가장 쉬운 방법은 정의를 우측에서 좌측으로 읽는 것이다. 변수 이름에 가장 가까운 (이 경우 <mark>&r</mark> 안의 <mark>*</mark>인) 기호는 변수의 타입에 가장 직접적인 영향을 미치는 것이다. 따라서 우리는 <mark>r</mark>이 레퍼런스라는 사실을 알 수 있다. 나머지 선언자는 <mark>r</mark>이 지시하는 타입을 결정한다. 다음 기호 <mark>*</mark>는 이 경우 타입 <mark>r</mark>이 포인터 타입을 지시한다는 것을 말한다. 마지막으로 선언의 기초 타입은 <mark>r</mark>이 <mark>int</mark>에 대한 포인터에 대한 레퍼런스라는 것을 말한다.
+<hr width="100%" noshade>
+<h3>팁</h3>
+복잡한 포인터 또는 레퍼런스 선언은 우측에서 좌측으로 읽으면 이해하기 수월할 수 있다.
+<hr width="100%" noshade>
+
+<h3>연습문제 2.3.3</h3>
+<b>연습문제 2.25</b> 아래 변수의 타입과 값을 결정할 것.
+<ol>
+<li><pre><code>int* ip, &r = ip;</code></pre></li>
+<li><pre><code>int i, *ip = 0;</code></pre></li>
+<li><pre><code>int* ip, ip2;</code></pre></li>
+</ol>
+
+    <hr width="100%" noshade>
+    <p style="text-align:right;">
+      <a href="http://www.charleshouserjr.com/Cplus2.pdf">C++ Primer 5th Edition</a>
+      (Lippman, Lajoie, Moo)
+      <br>번역 <a href="https://sunbeamktw.github.io/BirCon/">김태원</a></p>
+  </body>
+</html>
