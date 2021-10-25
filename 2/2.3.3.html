@@ -115,9 +115,9 @@ int*p2;	// p2 is a pointer to int</code></pre>
 int *pi = &ival;	// pi points to an int
 int **ppi = &pi;	// ppi points to a pointer to an int</code></pre>
 
-여기서 <mark>pi</mark>는 <mark>int</mark>에 대한 포인터고 <mark>ppi</makr>는 <mark>int</mark>에 대한 포인터에 대한 포인터다. 우리는 이들 객체를 다음처럼 표현할 수 있다.
+여기서 <mark>pi</mark>는 <mark>int</mark>에 대한 포인터고 <mark>ppi</mark>는 <mark>int</mark>에 대한 포인터에 대한 포인터다. 우리는 이들 객체를 다음처럼 표현할 수 있다.
 
-<center><img src="ppi.png" width="70%"></center>
+<br><center><img src="ppi.png" width="50%"></center><br>
 
 역참조와 마찬가지로 <mark>int</mark>에 대한 포인터는 <mark>int</mark>를 취하며, 포인터에 대한 포인터를 역참조하면 포인터를 취할 수 있다. 기저의 객체에 접근하려면 원래 포인터를 두 번 역참조해야 한다.
 
