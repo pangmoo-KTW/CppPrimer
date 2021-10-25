@@ -89,7 +89,7 @@ int i = 1024, *p = &i, &r = i;</code></pre>
 <pre><code>int* p;	// legal but might be misleading</code></pre>
 우리는 이 정의가 오도적이라고 평가하는데 왜냐하면 <mark>int*</mark>가 이 문장에 선언되는 각 변수의 타입이라고 제안하기 때문이다. 보이는 것과 다르게 이 선언의 기초 타입은 <mark>int</mark>지 <mark>int*</mark>가 아니다. <mark>*</mark>는 <mark>p</mark>의 타입을 제어한다. 같은 문장에 선언된 다른 객체에 관해서는 아무것도 말하지 않는다.
 
-<pre><code>int *p1, *p2	// both p1 and p2 are pointers to int</mark>
+	  <pre><code>int *p1, *p2	// both p1 and p2 are pointers to int</code></pre>
 <p>이 스타일은 변수가 암시된 복합 타입을 지닌다는 것을 강조한다.</p>
 
 <p>두 번째 코드는 타입 제어자를 타입과 함께 위치시키지만 한 문장당 오직 하나의 변수를 정의한다.</p>
