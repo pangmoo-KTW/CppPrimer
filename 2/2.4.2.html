@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>
+      CppPrimer
+    </title>
+    <link rel="icon" href="../favicon.ico">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+      href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/qtcreator-dark.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+    <center>
+    <a href="../index.html"><h3>C++ 기초</h3></a>      
+    <hr width="50%" noshade>
+    </center>
+    
+    <div class="row">
+      <div class="left">
+        <ol>
+          <li><a href="../1/0.html">시작</a></li>
+        <li><mark id="red">기본</mark></li>
+        <li><a href="../3/0.html">문자열, 벡터, 배열</a></li>
+        <li><a href="../4/0.html">표현식</a></li>
+        <li><a href="../5/0.html">문장</a></li>
+        <li><a href="../6/0.html">함수</a></li>
+        <li><a href="../7/0.html">클래스</a></li>
+        <li><a href="../8/0.html">IO 라이브러리</a></li>
+        <li><a href="../9/0.html">순차 컨테이너</a></li>
+        <li><a href="../10/0.html">제네릭 알고리즘</a></li>
+        <li><a href="../11/0.html">연관 컨테이너</a></li>
+        <li><a href="../12/0.html">동적 메모리</a></li>
+        <li><a href="../13/0.html">복사 제어</a></li>
+        <li><a href="../14/0.html">연산자 오버로드 및 변환</a></li>
+        <li><a href="../15/0.html">객체 지향 프로그래밍</a></li>
+        <li><a href="../16/0.html">템플릿과 제네릭 프로그래밍</a></li>
+        <li><a href="../17/0.html">라이브러리 특수 기능</a></li>
+        <li><a href="../18/0.html">대형 프로그램 도구</a></li>
+        <li><a href="../19/0.html">특수 도구 및 기법</a></li>
+      </ol> 
+      <ul>
+        <li>부록 <a href="../A/html">라이브러리</a></li>
+      </ul>
+      </div>
+      
+      <div class="center">
+        <ol>
+          <li><a href="2.1.html">원시 내장형 타입</a></li>
+          <li><a href="2.2.html">변수</a></li>
+          <li><a href="2.3.html">복합 타입</a></li>
+          <li><mark id="red">const 형식 한정자</mark></li>
+          <li><a href="2.5.html">타입 다루기</a></li>
+          <li><a href="2.6.html">우리만의 자료구조 정의</a></li>
+        </ol>
+        <ul>
+          <li><a href="2.a.html">단원 요약</a></li>
+          <li><a href="2.b.html">용어 정리</a></li>
+        </ul>
+      </div>
+      
+      <div class="right">
+        <ol>
+          <li><a href="2.4.1.html">const에 대한 레퍼런스</a></li>
+          <li><mark id="red">포인터와 const</mark></li>
+          <li><a href="2.4.3.html">최상위 const</a></li>
+          <li><a href="2.4.4.html">constexpr와 상수 표현식</a></li>
+        </ol>
+      </div>
+    </div>
+    
+    <hr width="100%" noshade>
+레퍼런스와 마찬가지로 우리는 <mark>const</mark>든 <mark>const</mark>가 아닌 타입이든 이를 가리키는 포인터를 정의할 수 있다. <mark>const</mark>에 대한 레퍼런스와 마찬가지로 (<a href="2.4.1.html">§2.4.1</a>) <b>const에 대한 포인터</b>는 포인터가 가리키는 객체를 바꾸는 데 쓰이지 않을 수 있다. 우리는 <mark>const</mark> 객체의 주소를 오직 <mark>const</mark>에 대한 포인터에만 저장할 수 있다.
+
+<pre><code>const double pi = 3.14;		// pi is const; its value may not be changed
+double *ptr = &pi;		// error: ptr is a plain pointer
+const double *cptr = &pi;	// ok: cptr may point to a double that is const
+*cptr = 42;			// error: cannot assign to *cptr</code></pre>
+
+<a href="2.3.2.html">§2.3.2</a>에서 우리는 포인터와 포인터가 가리키는 객체의 타입이 일치해야 한다는 규칙에 두 가지 예외가 있다고 했다. 첫 번째 예외는 바로 우리가 <mark>const</mark>에 대한 포인터가 <mark>const</mark>가 아닌 객체를 가리킬 수 있도록 만들 수 있다는 것이다.
+
+<pre><code>double dval = 3.14;		// dval is a double; its value can be changed
+cptr = &dval;		// ok: but can’t change dval through cptr</code></pre>
+
+<mark>const</mark>에 대한 레퍼런스와 마찬가지로 <mark>const</mark>에 대한 포인터는 포인터가 가리키는 객체가 <mark>const</mark>인지 알지 못한다. 포인터를 <mark>const</mark>에 대한 포인터로 정의하는 일은 오직 포인터로 할 수 있는 일에만 영향을 미친다. <mark>const</mark>에 대한 포인터로 가리켜지는 객체가 변하지 않으리라는 보장이 없다는 점을 기억하는 것이 중요하다.
+
+<hr widht="100%" noshade>
+<mark>const</mark>에 대한 포인터와 레퍼런스를 “<mark>const</mark>를 가리키거나 지시한다고 <b>생각하는</b>” 포인터와 레퍼런스로 간주하는 것이 유용하다.
+<hr widht="100%" noshade>
+
+<h3><mark>const</mark> 포인터</h3>
+레퍼런스와 다르게 포인터는 객체다. 따라서 여느 객체와 마찬가지로 우리는 그 자체가 <mark>const</mark>인 포인터를 가질 수 있다. 또 여느 <mark>const</mark> 객체와 마찬가지로 <mark>const</mark> 포인터는 초기화되어야 하며, 한 번 초기화되면 그 값은 (즉, 그것이 취하는 주소는) 변하지 않는다. 우리는 <mar>*</mark> 옆에 <mark>const</mark>를 붙여 포인터가 <mark>const</mark>라는 것을 암시한다. 이는 바로 가리켜지는 타입이 아니라 바로 포인터가 <mark>const</mark>라는 것을 암시한다.
+
+<pre><code>int errNumb = 0;
+int *const curErr = &errNumb;	// curErr will always point to errNumb
+const double pi = 3.14159;
+const double *const pip = &pi;	// pip is a const pointer to a const object</code></pre>
+
+<p><a href="2.3.3.html">§2.3.3</a>에서 본 것과 마찬가지로 이들 선언을 이해하는 가장 쉬운 방법은 우측에서 좌측으로 읽는 것이다. 이 경우, <mark>curErr</mark>에서 가장 가까운 기호는 <mark>const</mark>로, <mark>curErr</mark> 자체가 <mark>const</mark> 객체란느 것을 뜻한다. 그 객체의 타입은 선언자의 나머지 부분으로 형성된다. 선언자에서 다음 기호는 <mark>*</mark>로, <mark>currErr</mark>가 <mark>const</mark> 포인터라는 것을 뜻한다. 마지막으로 선언자의 기초 타입은 <mark>curErr</mark>의 타입을 완성하는데, 그것은 바로 <mark>int</mark> 타입의 객체에 대한 <mark>const</mark> 포인터다. 유사하게 <mark>pip</mark>은 <mark>const double</mark> 타입 객체에 대한 <mark>const</mark> 포인터다.</p>
+
+<p>포인터 자체가 <mark>const</mark>라는 사실은 우리가 포인터를 사용해 기저의 객체를 바꿀 수 있는지 없는지에 관해 아무것도 알려주지 않는다. 객체 변경 여부는 전적으로 포인터가 가리키는 타입에 의존한다. 가령 <mark>pip</mark>는 <mark>const</mark>에 대한 <mark>const</mark> 포인터다. <mark>pip</mark>이 가리키는 객체의 값도 <mark>pip</mark>에 저장된 주소도 변경될 수 없다. 다른 한편 <mark>curErr</mark>는 일반적인 <mark>const</mark>가 아닌 <mark>int</mark>를 가리킨다. 우리는 <mark>curErr</mark>를 이용해 <mark>errNumb</mark>의 값을 바꿀 수 있다.</p>
+
+<pre><code>*pip = 2.72;		// error: pip is a pointer to const
+// if the object to which curErr points (i.e., errNumb) is nonzero
+if (*curErr) {
+	errorHandler();
+	*curErr = 0;	// ok: resets the value of the object to which curErr is bound
+}</code></pre>
+
+    <hr width="100%" noshade>
+    <p style="text-align:right;">
+      <a href="http://www.charleshouserjr.com/Cplus2.pdf">C++ Primer 5th Edition</a>
+      (Lippman, Lajoie, Moo)
+      <br>번역 <a href="https://sunbeamktw.github.io/BirCon/">김태원</a></p>
+  </body>
+</html>
