@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>
+      CppPrimer
+    </title>
+    <link rel="icon" href="../favicon.ico">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+      href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/qtcreator-dark.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+    <center>
+    <a href="../index.html"><h3>C++ 기초</h3></a>      
+    <hr width="50%" noshade>
+    </center>
+    
+    <div class="row">
+      <div class="left">
+        <ol>
+          <li><a href="../1/0.html">시작</a></li>
+        <li><mark id="red">기본</mark></li>
+        <li><a href="../3/0.html">문자열, 벡터, 배열</a></li>
+        <li><a href="../4/0.html">표현식</a></li>
+        <li><a href="../5/0.html">문장</a></li>
+        <li><a href="../6/0.html">함수</a></li>
+        <li><a href="../7/0.html">클래스</a></li>
+        <li><a href="../8/0.html">IO 라이브러리</a></li>
+        <li><a href="../9/0.html">순차 컨테이너</a></li>
+        <li><a href="../10/0.html">제네릭 알고리즘</a></li>
+        <li><a href="../11/0.html">연관 컨테이너</a></li>
+        <li><a href="../12/0.html">동적 메모리</a></li>
+        <li><a href="../13/0.html">복사 제어</a></li>
+        <li><a href="../14/0.html">연산자 오버로드 및 변환</a></li>
+        <li><a href="../15/0.html">객체 지향 프로그래밍</a></li>
+        <li><a href="../16/0.html">템플릿과 제네릭 프로그래밍</a></li>
+        <li><a href="../17/0.html">라이브러리 특수 기능</a></li>
+        <li><a href="../18/0.html">대형 프로그램 도구</a></li>
+        <li><a href="../19/0.html">특수 도구 및 기법</a></li>
+      </ol> 
+      <ul>
+        <li>부록 <a href="../A/html">라이브러리</a></li>
+      </ul>
+      </div>
+      
+      <div class="center">
+        <ol>
+          <li><a href="2.1.html">원시 내장형 타입</a></li>
+          <li><a href="2.2.html">변수</a></li>
+          <li><a href="2.3.html">복합 타입</a></li>
+          <li><mark id="red">const 형식 한정자</mark></li>
+          <li><a href="2.5.html">타입 다루기</a></li>
+          <li><a href="2.6.html">우리만의 자료구조 정의</a></li>
+        </ol>
+        <ul>
+          <li><a href="2.a.html">단원 요약</a></li>
+          <li><a href="2.b.html">용어 정리</a></li>
+        </ul>
+      </div>
+      
+      <div class="right">
+        <ol>
+          <li><mark id="red">const에 대한 레퍼런스</mark></li>
+          <li><a href="2.4.2.html">포인터와 const</a></li>
+          <li><a href="2.4.3.html">최상위 const</a></li>
+          <li><a href="2.4.4.html">constexpr와 상수 표현식</a></li>
+        </ol>
+      </div>
+    </div>
+    
+    <hr width="100%" noshade>
+다른 객체와 마찬가지로 우리는 <mark>const</mark> 타입 객체에 대해 레퍼런스를 구속할 수 있다. 이를 위해 우리는 <b>const에 대한 레퍼런스</b>를 사용하는데, 이는 <mark>const</mark> 타입을 지시하는 레퍼런스다. 일반적인 레퍼런스와 달리, <mark>const</mark>에 대한 레퍼런스는 레퍼런스가 구속하는 객체를 바꾸기 위해 쓰일 수 없다.
+
+<pre><code>const int ci = 1024;
+const int &r1 = ci;	// ok: both reference and underlying object are const
+r1 = 42;		// error: r1 is a reference to const
+int &r2 = ci;		// error: non const reference to a const object</code></pre>
+
+우리가 직접 <mark>ci</mark>에 대입할 수 없기 때문에, 우리는 또한 <mark>ci</mark>를 바꾸기 위해 레퍼런스를 사용할 수 없다. 따라서 <mark>r2</mark>의 초기화는 오류다. 이 초기화가 타당했다면, 우리는 <mark>r2</mark>를 사용해 기저의 객체의 값을 바꿀 수 있었을 것이다.
+
+<hr width="100%" noshade>
+<h3>용어법: <mark>const</mark> 레퍼런스는 <mark>const</mark>에 대한 레퍼런스다</h3>
+<p>C++ 프로그래머는 “<mark>const</mark>에 대한 레퍼런스”라는 표현을 “<mark>const</mark> 레퍼런스”라고 축약하기도 한다. 이와 같은 축약은 말이 된다. 축약이라는 것을 기억하기만 한다면 말이다.</p>
+<p>엄밀히 말하면 <mark>const</mark> 레퍼런스라는 것은 존재하지 않는다. 레퍼런스는 객체가 아니며, 그렇기에 레퍼런스 그 자체를 <mark>const</mark>로 만들 수는 없다. 물론 레퍼런스가 또 다른 객체를 지시하게 만들 방법이 없기에, 모든 레퍼런스는 어떤 의미에서 <mark>const</mark>다. 레퍼런스가 <mark>const</mark>를 지시하거나 <mark>const</mark>가 아닌 타입을 지시하거나 우리가 그 레퍼런스로 할 수 있는 일에 영향을 미치지, 레퍼런스의 구속 대상 자체를 다룰 수는 없다. </p>
+<hr width="100%" noshade>
+<h3>초기화와 <mark>const</mark>에 대한 레퍼런스</h3>
+<a href="2.3.1.html">§2.3.1</a>에서 우리는 레퍼런스의 타입이 레퍼런스가 지시하는 객체의 타입과 반드시 일치해야 한다는 규칙에 두 가지 예외가 있다고 했다. 첫 번째 예외는 우리가 레퍼런스의 타입으로 변환될 수 있는 (<a href="2.1.2.html">§2.1.2</a>) 아무 표현식에서 <mark>const</mark>에 대한 레퍼런스를 초기화할 수 있다는 것이다. 특히 우리는 <mark>const</mark>에 대한 레퍼런스를 <mark>const</mark>가 아닌 객체, 리터럴, 또는 더 일반적인 표현식에 구속할 수 있다.
+
+<pre><code>int i = 42;
+const int &r1 = i;		// we can bind a const int& to a plain int object
+const int &r2 = 42;		// ok: r1 is a reference to const
+const int &r3 = r1 * 2;	//ok: r3 is a reference to const
+int &r4 = r * 2;		// error: r4 is a plain, non const reference</code></pre>
+
+초기화 규칙상의 이런 차이를 이해하는 가장 쉬운 방법은 다른 타입의 한 객체에 대해 레퍼런스를 구속할 때 일어나는 일을 관찰하는 것이다.
+
+<pre><code>double dval = 3.14;
+const int &ri = dval;</code></pre>
+
+여기서 <mark>ri</mark>는 <mark>int</mark>를 지시한다. <mark>ri</mark>에 대한 연산은 정수 연산일 것이다만, <mark>dval</mark>은 부동소수점 수이지 정수가 아니다. <mark>ri</mark>가 구속된 객체가 <mark>int</mark>라는 점을 확언하고자, 컴파일러는 위 코드를 아래처럼 변형한다.
+
+<pre><code>const int temp = dval;    // create a temporary const int from the double
+const int &ri = temp;    // bind ri to that temporary</code></pre>
+
+<p>이 경우, <mark>ri</mark>는 <b>임시(temporary)</b> 객체로 구속된다. 임시 객체란 컴파일러가 표현식 평가 결과를 저장하는 장소가 필요할 때 컴파일러에 의해 생성되는 이름 없는 객체를 뜻한다. C++ 프로그래머는 임시라는 단어로 임시 객체를 축약하기도 한다.</p>
+
+<p>이제 이 초기화가 허용되지만 <mark>ri</mark>가 <mark>const</mark>가 아니라고 생각하라. <mark>ri</mark>가 <mark>const</mark>가 아니라면 우리는 <mark>ri</mark>에 대입할 수 있을 것이다. 이로 인해 <mark>ri</mark>가 구속된 객체를 바꿀 수 있을 것이다. 그 객체는 임시 객체이지 <mark>dval</mark>이 아니다. <mark>ri</mark>가 <mark>dval</mark>을 지시하게 만든 프로그래머는 <mark>ri</mark>에 대한 대입이 <mark>dval</mark>을 변화시킬 것이라고 예상할 것이다. 결국 <mark>ri</mark>가 구속된 객체를 바꿀 것이 아니면 왜 <mark>ri</mark>에 대입하겠는가? 프로그래머가 의도한 것이 임시 객체에 대한 레퍼런스를 구속하는 것이 <b>아닐 것이기에</b> 언어는 이를 타당하지 않은 것으로 만들었다.</p>
+
+<h3><mark>const</mark>에 대한 레퍼런스는 <mark>const</mark>가 아닌 객체를 지시할 수도 있다</h3>
+<mark>const</mark>에 대한 레퍼런스가 오직 우리가 그 레퍼런스를 통해 할 수 있는 일만 제한할 수 있다는 점에 주의하라. <mark>const</mark>에 대한 레퍼런스를 한 객체와 구속하는 일은 기저의 객체가 <mark>const</mark>라는 암시를 담지 않는다. 기저의 객체가 <mark>const</mark>가 아닐 것이기 때문에, 이는 다른 의미로 바뀔 수 있다.
+<pre><code>int i = 42;
+int &r1 = i;		// r1 bound to i
+const int &r2 = i;	// r2 also bound to i, but cannot be used to change i
+r1 = 0;			// r1 is not const; i is now 0
+r2 = 0;			// error: r2 is a reference to const</code></pre>
+<mark>r2</mark>를 (<mark>const</mark>가 아닌) <mark>int i</mark>에 구속하는 일은 타당하다. 하지만 <mark>r2</mark>를 사용해 <mark>i</mark>를 바꿀 수는 없다. 그렇더라도, <mark>i</mark>의 값은 여전히 바뀔 것이다. 우리는 직접 대입하여 <mark>i</mark>를 바꾸거나 다른 <mark>r1</mark>처럼 레퍼런스를 <mark>i</mark>에 구속하여 대입함으로써 <mark>i</mark>를 바꿀 수 있다. 
+
+    <hr width="100%" noshade>
+    <p style="text-align:right;">
+      <a href="http://www.charleshouserjr.com/Cplus2.pdf">C++ Primer 5th Edition</a>
+      (Lippman, Lajoie, Moo)
+      <br>번역 <a href="https://sunbeamktw.github.io/BirCon/">김태원</a></p>
+  </body>
+</html>
