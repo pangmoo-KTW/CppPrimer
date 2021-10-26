@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>
+      CppPrimer
+    </title>
+    <link rel="icon" href="../favicon.ico">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+      href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/qtcreator-dark.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+    <center>
+    <a href="../index.html"><h3>C++ 기초</h3></a>      
+    <hr width="50%" noshade>
+    </center>
+    
+    <div class="row">
+      <div class="left">
+        <ol>
+          <li><a href="../1/0.html">시작</a></li>
+        <li><mark id="red">기본</mark></li>
+        <li><a href="../3/0.html">문자열, 벡터, 배열</a></li>
+        <li><a href="../4/0.html">표현식</a></li>
+        <li><a href="../5/0.html">문장</a></li>
+        <li><a href="../6/0.html">함수</a></li>
+        <li><a href="../7/0.html">클래스</a></li>
+        <li><a href="../8/0.html">IO 라이브러리</a></li>
+        <li><a href="../9/0.html">순차 컨테이너</a></li>
+        <li><a href="../10/0.html">제네릭 알고리즘</a></li>
+        <li><a href="../11/0.html">연관 컨테이너</a></li>
+        <li><a href="../12/0.html">동적 메모리</a></li>
+        <li><a href="../13/0.html">복사 제어</a></li>
+        <li><a href="../14/0.html">연산자 오버로드 및 변환</a></li>
+        <li><a href="../15/0.html">객체 지향 프로그래밍</a></li>
+        <li><a href="../16/0.html">템플릿과 제네릭 프로그래밍</a></li>
+        <li><a href="../17/0.html">라이브러리 특수 기능</a></li>
+        <li><a href="../18/0.html">대형 프로그램 도구</a></li>
+        <li><a href="../19/0.html">특수 도구 및 기법</a></li>
+      </ol> 
+      <ul>
+        <li>부록 <a href="../A/html">라이브러리</a></li>
+      </ul>
+      </div>
+      
+      <div class="center">
+        <ol>
+          <li><a href="2.1.html">원시 내장형 타입</a></li>
+          <li><a href="2.2.html">변수</a></li>
+          <li><a href="2.3.html">복합 타입</a></li>
+          <li><mark id="red">const 형식 한정자</mark></li>
+          <li><a href="2.5.html">타입 다루기</a></li>
+          <li><a href="2.6.html">우리만의 자료구조 정의</a></li>
+        </ol>
+        <ul>
+          <li><a href="2.a.html">단원 요약</a></li>
+          <li><a href="2.b.html">용어 정리</a></li>
+        </ul>
+      </div>
+      
+      <div class="right">
+        <ol>
+          <li><a href="2.4.1.html">const에 대한 레퍼런스</a></li>
+          <li><a href="2.4.2.html">포인터와 const</a></li>
+          <li><a href="2.4.3.html">최상위 const</a></li>
+          <li><a href="2.4.4.html">constexpr와 상수 표현식</a></li>
+        </ol>
+      </div>
+    </div>
+    
+    <hr width="100%" noshade>
+    종종 그 값이 바뀔 수 없다는 것을 아는 변수를 정의하고자 할 때도 있을 것이다. 가령 버퍼 사이즈의 크기를 지시하는 변수를 사용하고자 할 수도 있을 것이다. 원래 사이즈가 원하는 것이 아니어서 버퍼의 크기를 바꾸고자 할 때 변수는 유용할 것이다. 다른 한편 코드가 버퍼 크기 표현에 쓰인 변수에 아무 값이나 주는 것을 방지하고 싶기도 할 것이다. 변수의 타입을 <b>const</b>로 정의하여 변수를 바꿀 수 없게끔 만들 수 있다.
+
+<pre><code>const int bufSize = 512;	// input buffer size</code></pre>
+
+위 코드는 <mark>bufSize</mark>를 상수로 정의한다. <mark>bufSize</mark>에 대입하려는 시도는 전부 오류다.
+
+<pre><code>bufSize = 512;	// error: attempt to write to cnost object</code></pre>
+
+생성 이후에는 <mark>const</mark> 객체의 값을 바꿀 수 없기에 이는 반드시 초기화되어야 한다. 여느 때와 마찬가지로 초기화자는 복잡한 표현식일 수도 있다.
+
+<pre><code>const int i = get_size();		// ok: initialized at run time
+const int j = 42;	// ok: initialized at compile time
+const int k;		// error: k is uninitialized const</code></pre>
+
+<h3>초기화와 <mark>const</mark></h3>
+<p>여러 번 봤듯이 객체의 타입은 그 객체로 수행할 수 있는 연산을 정의한다. <mark>const</mark> 타입은 <mark>const</mark>가 아닌 타입에서 수행할 수 있는 연산 대다수를 수행할 수 있지만 전부는 아니다. 하나의 제한은 바로 객체를 바꿀 수 없는 연산에만 <mark>const</mark> 타입을 쓸 수 있다는 것이다. 가령 <mark>const int</mark>가 아닌 일반적인 타입을 사용하는 방식으로 <mark>const int</mark>를 연산 표현식에 사용할 수 있다. <mark>const int</mark>는 일반적인 <mark>int</mark>와 마찬가지 방식으로 <mark>bool</mark>로 변환된다. 등등.</p>
+
+<p>객체의 값을 바꾸지 않은 연산에는 초기화가 있다. 하나의 객체를 다른 객체를 초기화하기 위해 사용할 때, 객체가 <mark>const</mark>인지는 무관하다.</p>
+
+<pre><code>int i = 42;
+const int ci = i;		// ok: the value in i is copied into ci
+int j = ci;	// ok: the value in ci is copied into j</code></pre>
+
+<p><mark>ci</mark>가 <mark>const int</mark>이더라도, <mark>ci</mark> 안의 값은 <mark>int</mark>다. <mark>ci</mark>의 <mark>const</mark>적인 성질은 <mark>ci</mark>를 바꿀 수 있는 연산에만 적용된다. <mark>ci</mark>를 <mark>j</mark>를 초기화하는 데 사용할 때, <mark>ci</mark>가 <mark>const</mark>인지 신경쓸 필요는 없다. 객체 복사는 그 객체를 바꾸지 않는다. 복사본이 만들어지면 새론 객체가 더는 원래 객체에 접근하지 않는다.</p>
+
+<h3>디폴트로, <mark>const</mark> 객체는 파일에 지역적이다.</p>
+
+아래처럼 <mark>const</mark> 객체가 컴파일시간 상수로 초기화되면
+
+<pre><code>const int bufSize = 512;	// input buffer size</code></pre>
+
+<p>컴파일러는 컴파일 과정에서 주로 변수의 쓰임을 그에 상응하는 값으로 대체할 것이다. 즉 컴파일러는 우리의 코드가 <mark>bufSize</mark>를 이용하는 곳에서 <mark>512</mark>라는 값을 이용하는 코드를 생성해낼 것이다.</p>
+
+<p>변수를 값으로 대체하려면 컴파일러는 변수의 초기화자를 봐야 한다. 우리가 프로그램을 여러 파일로 쪼갤 때 <mark>const</mark>를 사용하는 파일은 전부 제 초기화자에 대해 접근할 수 있어야 한다. 초기화자를 보기 위해, 변수는 변수의 값을 사용하고자 하는 (<a href="2.2.2.html">§2.2.2</a>) 모든 파일에 정의되어야 한다.</p>
+
+<p>종종 우리는 여러 파일에 걸쳐 공유하고 싶은 <mark>const</mark> 변수를 갖지만 그 초기화자가 상수 표현식이 아닐 수 있다. 이 경우, 우리는 컴파일러가 각 파일마다 따로따로 변수를 생성하길 바라지 않는다. 대신 <mark>const</mark> 객체가 여타 (<mark>const</mark>가 아닌) 변수처럼 행동하기를 바란다. 우리는 <mark>const</mark>를 하나의 파일에 정의한 다음 이를 그 객체를 사용하는 다른 파일에서 선언하기를 바란다.</p>
+
+<p><mark>const</mark> 변수의 단일 인스턴스를 정의하기 위해서는 정의와 선언 모두에 <mark>extern</mark> 키워드를 사용한다.</p>
+
+<pre><code>// file_1.cc defines and initializes a const that is accessible to other files
+extern const int bufSize = fcn();
+// file_1.ht
+extern const int bufsize;	// same bufSize as defined in file_1.cc</code></pre>
+
+<p>이 프로그램에서 <mark>file_1.cc</mark>는 <mark>bufSize</mark>를 정의하고 초기화한다. 왜냐하면 이 선언이 초기화자를 포함하기에 , 이는 (여느 떄와 마찬가지로) 정의다. 하지만 <mark>bufSize</mark>가 <mark>const</mark>이기에, <mark>bufSize</mark>가 다른 파일에도 쓰일 수 있도록 <mark>extern</mark>을 특정해야 한다.</p>
+
+<p><mark>file_1.h</mark>의 선언 또한 <mark>extern</mark>이다. 이 경우 <mark>extern</mark>은 <mark>bufSize</mark>가 이 파일에 지역적이지 않으며 이 정의가 다른 곳에도 나타날 것이라는 점을 명시한다.</p>
+
+<hr width="100%" noshade>
+<h3>연습문제 2.4</h3>
+<b>연습문제 2.26</b> 타당한 것과 타당하지 않은 것을 구분하고 그 이유를 설명할 것.
+<ol>
+<li><pre><code>const int buf;</pre></code></li>
+<li><pre><code>int cnt = 0;</pre></code></li>
+<li><pre><code>const int sz = cnt;</pre></code></li>
+<li><pre><code>++cnt; ++sz;</pre></code></li>
+</ol>
+
+    <hr width="100%" noshade>
+    <p style="text-align:right;">
+      <a href="http://www.charleshouserjr.com/Cplus2.pdf">C++ Primer 5th Edition</a>
+      (Lippman, Lajoie, Moo)
+      <br>번역 <a href="https://sunbeamktw.github.io/BirCon/">김태원</a></p>
+  </body>
+</html>
