@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+  
+  <head>
+    <title>
+      CppPrimer
+    </title>
+    <link rel="icon" href="../favicon.ico">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+      href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/qtcreator-dark.min.css">
+<script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  
+  <body>
+    <center>
+    <a href="../index.html"><h3>C++ 기초</h3></a>      
+    <hr width="50%" noshade>
+    </center>
+    
+    <div class="row">
+      <div class="left">
+        <ol>
+          <li><a href="../1/0.html">시작</a></li>
+        <li><mark id="red">기본</mark></li>
+        <li><a href="../3/0.html">문자열, 벡터, 배열</a></li>
+        <li><a href="../4/0.html">표현식</a></li>
+        <li><a href="../5/0.html">문장</a></li>
+        <li><a href="../6/0.html">함수</a></li>
+        <li><a href="../7/0.html">클래스</a></li>
+        <li><a href="../8/0.html">IO 라이브러리</a></li>
+        <li><a href="../9/0.html">순차 컨테이너</a></li>
+        <li><a href="../10/0.html">제네릭 알고리즘</a></li>
+        <li><a href="../11/0.html">연관 컨테이너</a></li>
+        <li><a href="../12/0.html">동적 메모리</a></li>
+        <li><a href="../13/0.html">복사 제어</a></li>
+        <li><a href="../14/0.html">연산자 오버로드 및 변환</a></li>
+        <li><a href="../15/0.html">객체 지향 프로그래밍</a></li>
+        <li><a href="../16/0.html">템플릿과 제네릭 프로그래밍</a></li>
+        <li><a href="../17/0.html">라이브러리 특수 기능</a></li>
+        <li><a href="../18/0.html">대형 프로그램 도구</a></li>
+        <li><a href="../19/0.html">특수 도구 및 기법</a></li>
+      </ol> 
+      <ul>
+        <li>부록 <a href="../A/html">라이브러리</a></li>
+      </ul>
+      </div>
+      
+      <div class="center">
+        <ol>
+          <li><a href="2.1.html">원시 내장형 타입</a></li>
+          <li><a href="2.2.html">변수</a></li>
+          <li><a href="2.3.html">복합 타입</a></li>
+          <li><mark id="red">const 형식 한정자</mark></li>
+          <li><a href="2.5.html">타입 다루기</a></li>
+          <li><a href="2.6.html">우리만의 자료구조 정의</a></li>
+        </ol>
+        <ul>
+          <li><a href="2.a.html">단원 요약</a></li>
+          <li><a href="2.b.html">용어 정리</a></li>
+        </ul>
+      </div>
+      
+      <div class="right">
+        <ol>
+          <li><a href="2.4.1.html">const에 대한 레퍼런스</a></li>
+          <li><a href="2.4.2.html">포인터와 const</a></li>
+          <li><a href="2.4.3.html">최상위 const</a></li>
+          <li><mark id="red">constexpr와 상수 표현식</mark></li>
+        </ol>
+      </div>
+    </div>
+    
+    <hr width="100%" noshade>
+<p><b>상수 표현식(constant expression)</b>은 그 값이 바뀔 수 없으며 컴파일시간에 평가되는 표현식이다. 리터럴은 상수 표현식이다. 상수 표현식에서 초기화된 <mark>const</mark> 객체는 상수 표현식이다. 이제 살피겠지만 언어가 상수 표현식을 요구하는 상황은 다양하다.</p>
+
+주어진 객체(또는 표현식)은 타입과 초기화자에 따라 상수 표현식으로 결정된다. 가령 다음과 같다.
+<pre><code>const int  max_files = 20;	// max_files is a constant expression
+const int limit = max_files + 1;	// limit is a const expressikon
+int staff_size = 27;		// staff_size is not a constant expression
+const int sz = get_size();	// sz is not a constant expression</code></pre>
+
+<mark>staff_size</mark>가 리터럴로 초기화되었다고 하더라도, 이는 상수 표현식이 아닌데 왜냐하면 <mark>staff_size</mark>가 <mark>const</mark>가 아니라 단순히 <mark>int</mark>이기 때문이다. 다른 한편 <mark>sz</mark>가 <mark>cosnt</mark>더라도 그 초기화자의 값을 실행시간 이전까지는 알 수 없다. 따라서 <mark>sz</mark>는 상수 표현식이 아니다. 
+
+<h3><mark>constexpr</mark> 변수</h3>
+
+<p>큰 시스템에서는 초기화자가 상수 표현식인지 결정하거나 확신하기 어려울 수 있다. 우리는 <mark>const</mark> 변수를 우리가 상수 표현식이라고 생각하는 초기화자로 정의할 수도 있다. 하지만 우리가 초기화자를 요구하는 맥락에서 그 변수를 사용할 때면 우리는 그 초기화자가 상수 표현식이 아니라는 것을 발견할 수 있다. 일반적으로, 객체의 정의와 그 사용은 그러한 맥락 속에서 분리될 수 있다.</p>
+
+<p>새 표준에서 우리는 변수를 <mark>constexpr</mark>에서 선언해 컴파일러에게 변수가 상수 표현식이라는 것을 확언할 수 있다. <mark>constexpr</mark>로 선언된 변수는 암시적으로 <mark>const</mark>이며 반드시 상수 표현식으로 초기화되어야 한다.</p>
+
+<pre><code>constexpr int mf = 20;		// 20 is a constant expression
+constexpr int limit = mf + 1;		// mf + 1 is a constant expression
+constexpr int sz = size();		// ok only if size is a constexpr function</code></pre>
+
+우리가 <mark>cosntexpr</mark> 변수에 일반적인 함수를 초기화자로 사용할 수는 없더라도, 우리는 <a href="../6/6.5.2.html">§6.5.2</a>에서 새로운 표준이 우리로 하여금 특정 함수를 <mark>constexpr</mark>로 정의할 수 있게 만든다는 것을 볼 것이다. 이와 같은 함수는 컴파일러가 컴파일시간에 평가할 수 있을 만큼 충분히 단순해야 한다. 우리는 <mark>constexpr</mark> 변수의 초기화자에 <mark>constexpr</mark> 함수를 사용할 수 있다.
+
+<hr width="100%" noshade>
+<h3>모범 실무</h3>
+일반적으로, 상수 표현식으로 사용하고자 하는 변수를 위해 <mark>constexpr</mark>를 사용하는 것은 좋은 생각이다.
+<hr width="100%" noshade>
+
+<h3>리터럴 타입</h3>
+<p>상수 표현식이 컴파일시간에 평가되는 것이기에, <mark>constexpr</mark> 선언에 사용할 수 있는 타입에는 한계가 있다. <mark>constexpr</mark>에 사용할 수 있는 타입은 “리터럴 타입”이라고 불리는데 그 이유는 이들이 말 그대로의(literal) 값을 갖기에 충분히 단순하기 때문이다.</p>
+
+<p>우리가 지금껏 사용한 타입 가운데 연산, 레퍼런스, 포인터 타입은 리터럴 타입이다. <mark>Sales_item</mark> 클래스와 라이브러리 IO와 <mark>string</mark> 타입은 리터럴 타입이 아니다. 따라서 우리는 이들 타입의 변수를 <mark>constexpr</mark>로 정의할 수 없다. 우리는 <a href="../7/7.5.6.html">§7.5.6</a>과  <a href="../19/19.3.html">§19.3</a>에서 다른 종류의 리터럴 타입을 살필 것이다.</p>
+
+<p>우리가 포인터와 레퍼런스 모두 <mark>constexpr</mark>로 정의할 수 있다고 하더라도, 이들을 초기화하는 데 쓰이는 객체는 엄격하게 제한된다. 우리는 <mark>nullptr</mark>이나 리터럴(상수 표현식) <mark>0</mark>으로 <mark>constexpr</mark> 포인터를 초기화할 수 없다. 우리는 고정된 주소에 남아있는 객체를 가리킬 수 (있거나 구속할 수) 있다.</p>
+
+<p><a href="../6/6.1.1.html">§6.1.1</a>에서 다룰 이유에 따라, 함수 내부에 정의된 변수는 일반적으로 고정된 주소에 저장되지 않는다. 따라서 우리는 <mark>constexpr</mark> 포인터가 그러한 변수를 가리키도록 할 수 없다. 다른 한편, 모든 함수 바깥에서 정의된 객체의 주소는 상수 표현식이고, 그렇기에 <mark>constexpr</mark> 포인터를 초기화하는 데 쓰일 수 있다. 우리는 <a href="../6/6.1.1.html">§6.1.1</a>에서 함수가 함수 바깥에서 그 함수를 호출하는 변수를 정의할 수 있다는 것을 살필 것이다. 모든 함수 바깥에서 정의된 객체와 마찬가지로, 이들 특별한 객체들 또한 고정된 주소를 갖는다. 따라서 <mark>constexpr</mark> 레퍼런스는 그러한 변수를 구속할 수 있고, <mark>constexpr</mark> 포인터도 그러한 변수를 가리킬 수 있다.</p>
+
+<h3>포인터와 <mark>constexpr</mark></h3>
+
+<p>포인터를 <mark>constexpr</mark> 선언에 정의할 때, <mark>constexpr</mark> 지정자가 포인터에 적용되지 포인터가 가리키는 타입에 적용되지 않는다는 것을 이해하는 것이 중요하다.</p>
+
+<pre><code>const int *p = nullptr;		// p is a pointer to a const int
+constexpr int *q = nullptr;	// q is a const pointer to int</code></pre>
+
+<p>보이는 것과 다르게 <mark>p</mark>와 <mark>q</mark>의 타입은 꽤 다르다. <mark>p</mark>는 <mark>const</mark>에 대한 포인터이고, 한편 <mark>q</mark>는 상수 포인터다. 차이점은 <mark>constexpr</mark>가 자신이 정의하는 객체에 대해 최상위 <mark>const</mark>를 적용한다는 데서 비롯한다.</p>
+
+<p>여느 상수 포인터와 마찬가지로 <mark>constexpr</mark> 포인터는 <mark>const</mark>나 </mark>cosnt</mark>가 아닌 타입 모두 가리킬 수 있다.</p>
+
+<pre><code>constexpr int *np = nullptr;	// np is a constant pointer to int that is null
+int j = 0;
+constexpr int i = 42;	// type of i is const int
+// i and j must be defined outside any function
+constexpr const int *p = &i;	// p is a constant pointer to the const int i
+constexpr int *p1 = &j;	// p1 is a constant pointer to the int j</code></pre>
+
+<hr width="100%" noshade>
+<h3>연습문제 2.4.4</h3>
+<b>연습문제 2.32</b> 아래 코드는 타당한가? 타당하지 않다면, 어떻게 고칠 것인가?
+<pre><code>int null = 0, *p = null;</code></pre>
+
+    <hr width="100%" noshade>
+    <p style="text-align:right;">
+      <a href="http://www.charleshouserjr.com/Cplus2.pdf">C++ Primer 5th Edition</a>
+      (Lippman, Lajoie, Moo)
+      <br>번역 <a href="https://sunbeamktw.github.io/BirCon/">김태원</a></p>
+  </body>
+</html>
